@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import logoBlack from "../assets/logoBlack.png"
+import logoWhite from "../assets/logoWhite.png"
 
 const NavBar = () => {
 
@@ -23,12 +25,10 @@ const NavBar = () => {
     return (
         <nav className={`h-16 ${isScrolled ? 'text-white bg-slate-700' : null} z-10 sticky top-0 transition px-8 flex items-center`}>
             <Link to="/" className="text-2xl font-bold flex flex-col items-center">
-                <p className="tracking-wider font-extrabold">
-                    Junior
-                </p>
-                <p className="text-sm -translate-y-1.5 tracking-wide">
-                    NoMore
-                </p>
+                {isScrolled
+                    ? <img src={logoWhite} className="w-44" alt="" />
+                    : <img src={logoBlack} className="w-44" alt="" />
+                }
             </Link>
             <div className="mr-auto flex gap-6">
 
