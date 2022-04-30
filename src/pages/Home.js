@@ -1,19 +1,27 @@
-import { Link } from "react-router-dom";
-import Button from "../components/Button";
+import LinkAsButton from "../components/LinkAsButton";
 
 const Home = () => {
     return (
         <>
-            <div className="h-screen ">
-                <div className="mx-4 lg:mx-auto max-w-xl my-24 space-y-6">
-                    <div className="text-3xl lg:text-5xl text-[#1d1d1f]">מצא פרוייקט לעבוד עליו</div>
-                    <div className="text-3xl lg:text-5xl text-[#1d1d1f]">צבור נסיון בתחום שלך</div>
-                    <div className="text-3xl lg:text-5xl text-[#1d1d1f]">שדרג את קורות החיים</div>
-                    <Button text="התחל כאן" />
+            <div className="lg:h-screen">
+                <div className="mx-4 lg:mx-auto max-w-lg mt-12 lg:mt-36 space-y-6">
+                    <div className="relative select-none text-3xl lg:text-5xl text-[#1d1d1f]">
+                        <span className="pointer-events-none absolute right-0 top-0 scale-125 opacity-30 translate-x-12">1</span>
+                        מצא פרוייקט לעבוד עליו
+                    </div>
+                    <div className="relative select-none text-3xl lg:text-5xl text-[#1d1d1f]">
+                        <span className="pointer-events-none absolute right-0 top-0 scale-125 opacity-30 translate-x-12">2</span>
+                        צבור נסיון בתחום שלך
+                    </div>
+                    <div className="relative select-none text-3xl lg:text-5xl text-[#1d1d1f]">
+                        <span className="pointer-events-none absolute right-0 top-0 scale-125 opacity-40 translate-x-12">3</span>
+                        שדרג את קורות החיים
+                    </div>
+                    <LinkAsButton to="/login" text="התחל כאן" />
                 </div>
             </div>
-            <div className="h-screen flex">
-                <div className="w-[50vw] flex flex-col items-center text-3xl py-24">
+            <div className="h-screen lg:flex">
+                <div className=" flex grow flex-col items-center text-3xl py-24">
                     <div className="max-w-lg space-y-8">
                         <span>ארגון / עמותה?</span>
                         <ul className="list-disc text-xl space-y-4">
@@ -24,12 +32,12 @@ const Home = () => {
                             <li>אל ארץ כלשהו הקנאים, ויש.</li>
                         </ul>
                         <div className="text-base">
-                            <Button text="להרשמה" />
+                            <LinkAsButton text="להרשמה" to="/register" />
                         </div>
                     </div>
 
                 </div>
-                <div className="w-[50vw] text-white bg-slate-700 flex flex-col items-center text-3xl py-24">
+                <div className="grow text-white bg-slate-700 flex flex-col items-center text-3xl py-24">
                     <div className="max-w-lg space-y-8">
                         <span>ג'וניור / סטודנט?</span>
                         <ul className="list-disc text-xl space-y-4">
@@ -40,7 +48,7 @@ const Home = () => {
                             <li> לציין ספרדית שימושי צ'ט של</li>
                         </ul>
                         <div className="text-base">
-                            <Button text="להרשמה" secondary={true} />
+                            <LinkAsButton text="להרשמה" to="/register" secondary={true} />
                         </div>
                     </div>
                 </div>

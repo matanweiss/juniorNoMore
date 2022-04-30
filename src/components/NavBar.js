@@ -21,7 +21,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <nav className={`h-16 ${isScrolled ? 'text-white bg-slate-700' : null} sticky top-0 transition px-8 flex items-center`}>
+        <nav className={`h-16 ${isScrolled ? 'text-white bg-slate-700' : null} z-10 sticky top-0 transition px-8 flex items-center`}>
             <Link to="/" className="text-2xl font-bold flex flex-col items-center">
                 <p className="tracking-wider font-extrabold">
                     Junior
