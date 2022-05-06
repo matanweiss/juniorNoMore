@@ -23,11 +23,11 @@ const NavBar = () => {
     }, []);
 
     return (
-        <nav className={`h-16 ${isScrolled ? 'text-white bg-slate-700' : null} z-10 sticky top-0 transition px-8 flex items-center`}>
+        <nav className={` ${isScrolled ? 'text-white bg-slate-700 max-h-16' : "max-h-24"} h-24 z-10 sticky top-0 transition-all px-8 flex items-center`}>
             <Link to="/" className="text-2xl font-bold flex flex-col items-center">
                 {isScrolled
-                    ? <img src={logoWhite} className="w-44" alt="" />
-                    : <img src={logoBlack} className="w-44" alt="" />
+                    ? <img src={logoWhite} className={`w-44 transition duration-200 ${isScrolled ? 'opacity-100' : 'opacity-0'}`} alt="" />
+                    : <img src={logoBlack} className={`w-44 transition duration-200 ${isScrolled ? 'opacity-0' : 'scale-125 opacity-100'}`} alt="" />
                 }
             </Link>
             <div className="mr-auto flex gap-6">
