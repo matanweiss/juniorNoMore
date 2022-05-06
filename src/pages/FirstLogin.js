@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { toast } from "react-toastify";
 import Button from "../components/Button";
 import GenreToggle from "../components/GenreToggle";
 import SubGenreToggle from "../components/SubGenreToggle";
@@ -52,12 +53,16 @@ const FirstLogin = () => {
     };
 
     const logSubGenres = () => {
+        const selectedSubGenres = [];
         const children = subGenresRef.current.children;
         for (let i = 0; i < children.length; i++) {
             const child = children[i].firstChild;
             if (child.checked) {
-                console.log(child.name);
+                selectedSubGenres.push(child.name);
             }
+        }
+        if (selectedSubGenres.length === 0) {
+            toast.warn('יש לבחור לפחות תחום אחד')
         }
     };
 
