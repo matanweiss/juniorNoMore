@@ -1,42 +1,46 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../components/Button";
-import ToggleButton from "../components/ToggleButton";
+import GenreToggle from "../components/GenreToggle";
 
 const FirstLogin = () => {
 
-    const [genres, setGenres] = useState([
-        { name: 'אפשרות 1', isSelected: false },
-        { name: 'אפשרות 2', isSelected: false },
-        { name: 'אפשרות 3', isSelected: false },
-        { name: 'אפשרות 4', isSelected: false },
-        { name: 'אפשרות 512', isSelected: false },
-        { name: 'אפשרות 421', isSelected: false },
-        { name: 'אפשרות 5', isSelected: false },
-        { name: 'אפשרות 12', isSelected: false },
-        { name: 'אפשרות 412', isSelected: false },
-    ])
+    const genresRef = useRef();
+
+    const genres = [
+        'אפשרות 13',
+        'אפשרות 12',
+        'אפשרות 19',
+        'אפשרות 9',
+        'אפשרות 8',
+        'אפשרות 7',
+        'אפשרות 6',
+        'אפשרות 5',
+        'אפשרות 4',
+        'אפשרות 3',
+        'אפשרות 2',
+    ];
 
     const renderGenres = () => genres.map(genre =>
-        <ToggleButton name={genre.name} key={genre.name} action={handleGenreClick} text={genre.name} />
+        <GenreToggle name={genre} key={genre} text={genre} />
     );
 
-    const handleGenreClick = e => {
-        const name = e.target.name;
-        console.log(name);
-        const newGenres = genres.map(genre => genre.name === name ? { ...genre, isSelected: !genre.isSelected } : genre);
-        setGenres(newGenres);
+    const logGenres = () => {
+        const children = genresRef.current.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i].firstChild;
+            console.log(child.checked, child.name);
+        }
     }
-
 
     return (
         <div className="mx-4 lg:mx-auto max-w-lg mt-12 lg:mt-24 space-y-6">
             <h1 className="text-2xl text-center lg:text-4xl">ברוך הבא ל- JuniorNoMore!</h1>
             <p>כדי שנוכל למצוא לך פרוייקטים מתאימים, אנא בחר מספר תחומים בהם תוכל לתרום לארגונים:</p>
-            <div className="flex gap-2 flex-wrap">
+            <div ref={genresRef} className="flex gap-2 flex-wrap">
                 {renderGenres()}
             </div>
             <div className="lg:text-center">
-                <Button text="המשך" additionalClasses="w-full lg:w-36  mt-16" />
+                <Button action={logGenres} text="המשך" additionalClasses="w-full lg:w-36  mt-16" />
             </div>
         </div>
 
