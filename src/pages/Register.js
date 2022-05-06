@@ -13,7 +13,7 @@ const Register = () => {
                 <InputMail />
                 <InputPassword />
                 {/* <Button text="הרשם" /> */}
-                <LinkAsButton to="/explore" text="הרשם" />
+                <LinkAsButton to="/first-login" text="הרשם" />
             </div>
         </div>
     );
