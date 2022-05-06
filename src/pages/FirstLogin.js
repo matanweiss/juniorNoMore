@@ -84,7 +84,7 @@ const FirstLogin = () => {
     }
 
     return (
-        <div className="mx-4 lg:mx-auto max-w-2xl mt-12 lg:mt-24 space-y-6">
+        <div className="mx-4 lg:mx-auto max-w-2xl mt-8 space-y-6">
             <h1 className="text-2xl text-center lg:text-4xl">ברוך הבא ל- JuniorNoMore!</h1>
             <p>באיזה תחום הנך מתמקצע?</p>
             <div className="flex gap-2 flex-wrap">
