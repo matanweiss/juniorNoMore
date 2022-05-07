@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import InputMail from "../components/InputMail";
 import InputPassword from "../components/InputPassword";
@@ -6,7 +6,10 @@ import InputRadio from "../components/InputRadio";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import InputCheckbox from "../components/InputCheckbox";
-import { areas, degrees } from "../variables/variables";
+import { areas, degrees, universities } from "../variables/variables";
+import InputSearch from "../components/InputSearch";
+import InputText from "../components/InputText";
+import InputTextarea from "../components/InputTextarea";
 
 const Register = () => {
 
@@ -18,6 +21,13 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isDegree, setIsDegree] = useState(false);
+    const [degree, setDegree] = useState('');
+    const [area, setArea] = useState('');
+    const [university, setUniversity] = useState('');
+    const [city, setCity] = useState('');
+    const [field, setField] = useState('');
+    const [website, setWebsite] = useState('');
+    const [service, setService] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -44,27 +54,32 @@ const Register = () => {
         if (userType === 'junior') return (
             <>
                 <div className="flex flex-col">
-                    <label for="location">איזור בארץ:</label>
-                    <select name="location" id="location">
-                        {areas.map(area => <option value={area}>{area}</option>)}
+                    <label htmlFor="location">איזור בארץ:</label>
+                    <select onChange={e => setArea(e.target.value)} className="p-2 rounded-lg" name="location" id="location">
+                        {areas.map(area => <option key={area} value={area}>{area}</option>)}
                     </select>
                 </div>
-                <div>
+                <div className="space-y-4">
                     <InputCheckbox text="יש לך תואר / בלימודים" name="isDegree" isChecked={isDegree} onCheck={setIsDegree} />
                     {isDegree &&
-                        <>
-                            <div className="flex flex-col">
-                                <select name="location" id="location">
-                                    {degrees.map(degree => <option value={degree}>{degree}</option>)}
-                                </select>
-                            </div>
-                        </>}
+                        <div className="space-y-10 pt-4">
+                            <InputSearch description="תואר" data={degrees} setValue={setDegree} />
+                            <InputSearch description="מוסד לימודים" data={universities} setValue={setUniversity} />
+                        </div>
+                    }
+
+
                 </div>
+                <Button text="הרשמה" />
             </>)
         else return (
-            <>
-
-            </>)
+            <div className="space-y-8">
+                <InputText name="city" text="עיר" value={city} setValue={setCity} />
+                <InputText name="field" text="תחום העסק" value={field} setValue={setField} />
+                <InputText name="website" text="אתר העסק" value={website} setValue={setWebsite} />
+                <InputTextarea name="service" text="שירות נדרש" value={service} setValue={setService} />
+                <Button text="הרשמה" />
+            </div>)
     }
 
 

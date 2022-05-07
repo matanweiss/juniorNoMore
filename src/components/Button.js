@@ -1,7 +1,7 @@
 const Button = (props) => {
 
     const handleClick = e => {
-        props.action(e);
+        if (props.action) props.action(e);
     }
 
     return (
