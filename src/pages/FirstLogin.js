@@ -64,6 +64,9 @@ const FirstLogin = () => {
         if (selectedSubGenres.length === 0) {
             toast.warn('יש לבחור לפחות תחום אחד')
         }
+        else {
+            toast("התחומים שבחרת הם:\n" + selectedSubGenres.join());
+        }
     };
 
     const renderSubGenres = () => {
