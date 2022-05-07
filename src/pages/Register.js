@@ -2,14 +2,22 @@ import { useState } from "react";
 import Button from "../components/Button";
 import InputMail from "../components/InputMail";
 import InputPassword from "../components/InputPassword";
-import LinkAsButton from "../components/LinkAsButton";
 import InputRadio from "../components/InputRadio";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 
     const handleRadioChange = e => setUserType(e.target.id);
 
     const [userType, setUserType] = useState('');
+    const navigate = useNavigate();
+
+
+    const handleFirstNext = () => {
+        toast.success('נרשמת למערכת בהצלחה');
+        return navigate("/first-login");
+    }
 
     return (
         <div className="flex fixed inset-0 lg:bg-[#f5f5f7] justify-center items-center">
@@ -23,8 +31,7 @@ const Register = () => {
                     <InputRadio handleChange={handleRadioChange} type={userType} text="ג'וניור" name="junior" />
                     <InputRadio handleChange={handleRadioChange} type={userType} text="עסק" name="business" />
                 </div>
-                {/* <Button text="הרשם" /> */}
-                <LinkAsButton to="/first-login" text="הרשמה" />
+                <Button text="הרשמה" action={handleFirstNext} />
             </div>
         </div>
     );
