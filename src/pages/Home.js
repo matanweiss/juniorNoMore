@@ -4,17 +4,17 @@ const Home = () => {
     return (
         <>
             <div className="bg-gradient-to-b pb-48 from-transparent via-white to-slate-200">
-                <div className="px-4 text-center  lg:mx-auto max-w-lg mt-8 space-y-6">
+                <div className="px-4 text-center  lg:mx-auto max-w-2xl mt-8 space-y-6">
                     <div className="relative font-bold select-none text-3xl lg:text-5xl text-[#1d1d1f]">
-                        <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-12">1</span>
+                        <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-2">1</span>
                         למצוא פרוייקט
                     </div>
                     <div className="relative font-bold select-none text-3xl lg:text-5xl text-[#1d1d1f]">
-                        <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-12">2</span>
+                        <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-2">2</span>
                         לצבור נסיון
                     </div>
                     <div className="relative font-bold select-none text-3xl lg:text-5xl text-[#1d1d1f]">
-                        <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-40 translate-x-12">3</span>
+                        <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-2">3</span>
                         לשדרג את קורות החיים
                     </div>
                     <LinkAsButton to="/login" text="התחל כאן" additional="px-8" />
