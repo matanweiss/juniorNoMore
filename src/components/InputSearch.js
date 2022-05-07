@@ -24,7 +24,7 @@ const InputSearch = (props) => {
             {({ open }) =>
                 <>
                     <Combobox.Input size={27} onChange={handleChange} id="input"
-                        className="peer w-full outline-none border-b-2 focus:border-slate-600 border-slate-400 px-7 transition"
+                        className="peer w-full outline-none border-b-2 focus:border-slate-600 border-slate-400 px-7 transition rounded-none"
                         placeholder=" "
                     />
                     <label

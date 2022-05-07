@@ -7,7 +7,7 @@ const InputPassword = (props) => {
     return (
         <div className="flex flex-col relative">
             <input value={props.password} onChange={handleChange} required
-                className="peer border-b-2 focus:border-slate-700 border-slate-500 transition outline-none"
+                className="peer border-b-2 focus:border-slate-700 border-slate-500 transition outline-none rounded-none"
                 type="password" name="password" id="password" placeholder="" dir="ltr"
                 onInvalid={e => e.target.setCustomValidity('יש להכניס סיסמה')}
                 onInput={e => e.target.setCustomValidity('')}

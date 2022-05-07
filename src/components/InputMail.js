@@ -7,7 +7,7 @@ const InputMail = (props) => {
     return (
         <div className="flex flex-col relative">
             <input value={props.email} onChange={handleChange} required
-                className="peer border-b-2 focus:border-slate-700 border-slate-500 transition outline-none"
+                className="peer border-b-2 focus:border-slate-700 border-slate-500 transition outline-none rounded-none"
                 type="email" name="email" id="email" placeholder="" dir="ltr" size={30}
                 onInvalid={e => e.target.setCustomValidity('יש להכניס כתובת מייל תקינה')}
                 onInput={e => e.target.setCustomValidity('')}

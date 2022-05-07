@@ -7,7 +7,7 @@ const InputText = (props) => {
     return (
         <div className="flex flex-col relative">
             <input value={props.value} onChange={handleChange} required
-                className="peer border-b-2 focus:border-slate-700 border-slate-500 pr-1 transition outline-none"
+                className="peer border-b-2 focus:border-slate-700 border-slate-500 pr-1 transition outline-none rounded-none"
                 type="text" name={props.name} id={props.name} placeholder="" size={30}
                 onInvalid={e => e.target.setCustomValidity('יש למלא שדה זה')}
                 onInput={e => e.target.setCustomValidity('')}

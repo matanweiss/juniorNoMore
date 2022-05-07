@@ -6,7 +6,7 @@ const InputTextarea = (props) => {
 
     return (
         <div className="flex flex-col relative">
-            <textarea className="peer border-b-2 focus:border-slate-700 border-slate-500 pr-1 transition outline-none"
+            <textarea className="peer border-b-2 focus:border-slate-700 border-slate-500 pr-1 transition outline-none rounded-none"
                 placeholder="" name={props.name} id={props.name} cols="30" rows="4"
                 value={props.value} onChange={handleChange}
                 onInvalid={e => e.target.setCustomValidity('יש למלא שדה זה')}

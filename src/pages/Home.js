@@ -7,15 +7,15 @@ const Home = () => {
                 <div className="px-4 text-center  lg:mx-auto max-w-2xl mt-8 space-y-6">
                     <div className="relative font-bold select-none text-3xl lg:text-5xl text-[#1d1d1f]">
                         <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-2">1</span>
-                        למצוא פרוייקט
+                        מצא פרוייקט
                     </div>
                     <div className="relative font-bold select-none text-3xl lg:text-5xl text-[#1d1d1f]">
                         <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-2">2</span>
-                        לצבור נסיון
+                        צבור נסיון
                     </div>
                     <div className="relative font-bold select-none text-3xl lg:text-5xl text-[#1d1d1f]">
                         <span className="font-assistant pointer-events-none absolute right-0 -top-1 scale-125 opacity-30 translate-x-2">3</span>
-                        לשדרג את קורות החיים
+                        שדרג את קורות החיים
                     </div>
                     <LinkAsButton to="/login" text="התחל כאן" additional="px-8" />
                 </div>

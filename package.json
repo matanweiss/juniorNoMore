@@ -1,7 +1,7 @@
 {
   "name": "junior-no-more",
   "version": "0.1.0",
-  "homepage": "https://matanweiss.github.io/junior-no-more",
+  "homepage": "https://matanweiss.github.io/juniorNoMore",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.6.1",
