@@ -1,6 +1,8 @@
 
-const mySql = require('mysql');
-const connectionConfig = require('./config.json');
+var mySql = require('mysql');
+var config = require('./config.json');
+//ar connection = mysql.createConnection(config); 
+
 
 
 
@@ -12,7 +14,7 @@ let connection;
 
 function connect() {
     //here we asiggn to the global var - the open connection that we created
-    connection = mySql.createConnection(connectionConfig);
+    connection = mySql.createConnection(config);
 
     return new Promise((resolve, reject) => {
         connection.connect((err) => { err ? reject(err) : resolve(); });

@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const db = require('./DAL/index');
-const db2 = require('./DAL/inedx2');
+const db = require('../DAL/index');
+const db2 = require('../DAL/db');
+const authToken = require('../Middlewares/authentication');
 // const { signupValidation, loginValidation } = require('./validator');
 // const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-router.post('/register', (req, res) => {  
+db2.connect();
+router.post('/register',  (req, res) => {  
     db.query(
         `SELECT * FROM juniors WHERE LOWER(mail) = LOWER(${db.escape(
             req.body.email
@@ -52,21 +54,18 @@ router.post('/register', (req, res) => {
     );
     //res.send("hello world");
 });
-router.get('/check-users', (req, res) => {
+ router.get('/check-users',authToken, async (req, res)  => {
 
-        //res.send("hello world");
-        try{
-            let result = db2.runQuery('SELECT * FROM juniors');
-            let juniorsInfo = db2.extractDbResult(result)[0];
+         //res.send("hello world");
+          try{
+            let result = await db2.runQuery('SELECT * FROM juniors');
+            console.log(result);
+            let juniorsInfo = db2.extractDbResult(result);
             res.send(juniorsInfo);
-        }
+         }
         catch(e){
-            res.send("error");
-        }
-            
-        
-
-
+             res.send(e);
+         }
 
 });
 router.post('/login', (req, res, next) => {

@@ -3,7 +3,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const indexRouter = require('./router');
+const userRouter = require('./route/router');
  
 const app = express();
  
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({
  
 app.use(cors());
 
-app.use('/api', indexRouter);
+app.use('/api', userRouter);
 
  
 app.listen(3000,() => console.log('Server is running on port 3000'));
