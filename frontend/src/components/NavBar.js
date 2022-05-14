@@ -23,7 +23,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <nav className={` ${isScrolled ? 'text-white bg-slate-700 lg:max-h-16' : "lg:max-h-24"} h-16 lg:h-24 z-10 sticky top-0 transition-all px-8 flex items-center`}>
+        <nav className={` ${isScrolled ? 'text-white bg-slate-700 lg:pt-4 lg:-translate-y-4' : "lg:max-h-24"} h-16 lg:h-24 z-10 sticky top-0 transition-all px-8 flex items-center`}>
             <Link to="/" className="text-2xl font-bold flex flex-col items-center">
                 <div className="translate-x-8 lg:translate-x-0">
                     {isScrolled
