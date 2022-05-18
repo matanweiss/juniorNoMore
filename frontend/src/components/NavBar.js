@@ -32,6 +32,11 @@ const NavBar = () => {
                     }
                 </div>
             </Link>
+            <Link to="/" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline mr-16 ml-8`}>דף הבית</Link>
+            <Link to="/explore" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>משרות</Link>
+            <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>צור קשר</Link>
+            <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline `}>שאלות ותשובות</Link>
+
             <div className="mr-auto flex gap-6">
 
                 <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התחברות</Link>

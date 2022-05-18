@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import 'react-toastify/dist/ReactToastify.css';
 import Explore from "./pages/Explore";
+import Job from "./pages/Job";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/first-login" element={<FirstLogin />} />
         <Route path="/explore" element={<Explore />} />
+        <Route path="/job/:id" element={<Job />} />
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} rtl={true} />
     </>

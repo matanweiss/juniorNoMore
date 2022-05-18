@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import LinkAsButton from "../components/LinkAsButton";
 
 const Home = () => {
@@ -63,8 +64,13 @@ const Home = () => {
                     <div className="w-48 h-48 rounded-xl text-center p-6 shadow-lg text-black bg-slate-200">סטודנט</div>
                     <div className="w-48 h-48 rounded-xl text-center p-6 shadow-lg text-black bg-slate-200">סטודנט</div>
                 </div>
+                <div className="grid grid-cols-2 gap-y-16 place-items-center mt-24 lg:hidden">
+                    <Link to="/" className=''>דף הבית</Link>
+                    <Link to="/explore" className=''>משרות</Link>
+                    <Link to="/" className=''>צור קשר</Link>
+                    <Link to="/" className=''>שאלות ותשובות</Link>
+                </div>
             </div>
-
         </>
     );
 }
