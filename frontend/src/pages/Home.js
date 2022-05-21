@@ -30,15 +30,22 @@ const Home = () => {
                     פרוייקטים ממוקדים ויד ביד המאפשרת צמיחה לקידום עסקים קטנים ובינונים.</p>
 
             </div>
-            <div className="pb-36 px-4 bg-slate-100">
+            <div className="lg:pb-32 px-4 bg-slate-100">
                 <h2 className="text-center text-2xl p-12">המוסדות שעובדים איתנו</h2>
-                <div className="flex justify-evenly">
+                <div className="hidden lg:flex justify-evenly">
                     <img src={logo1} alt="" />
                     <img src={logo2} alt="" />
                     <img src={logo3} alt="" />
                     <img src={logo4} alt="" />
                 </div>
-                <div className="grid grid-cols-2 gap-y-16 place-items-center mt-24 lg:hidden">
+                <div className="flex gap-8 lg:hidden animate-scroll">
+                    <img src={logo1} alt="" />
+                    <img src={logo2} alt="" />
+                    <img src={logo3} alt="" />
+                    <img src={logo4} alt="" />
+                    <img src={logo1} alt="" />
+                </div>
+                <div className="grid grid-cols-2 gap-y-16 place-items-center mt-24 pb-16 lg:hidden">
                     <Link to="/" className=''>דף הבית</Link>
                     <Link to="/explore" className=''>משרות</Link>
                     <Link to="/" className=''>שאלות ותשובות</Link>
