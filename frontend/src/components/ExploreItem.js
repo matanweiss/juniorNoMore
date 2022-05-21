@@ -10,7 +10,7 @@ const ExploreItem = (props) => {
         title: 'כותרת',
         location: 'מיקום המשרה',
         hours: 'שעות המשרה',
-        details: 'פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה ',
+        details: 'פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים פרטים   ',
         subGenres: ['HTML', 'CSS', 'JAVASCRIPT'],
     }
 
@@ -30,7 +30,7 @@ const ExploreItem = (props) => {
                 {renderSubGenres()}
             </div>
             <div className="mt-8 flex gap-4 lg:flex-row flex-col justify-between relative">
-                <LinkAsButton to="/job/4" secondary={true} text={"פרטים נוספים"} />
+                <LinkAsButton to="/job/4" text={"פרטים נוספים"} />
                 {props.applicable && <Button text="הגשת מועמדות" />}
             </div>
         </div>

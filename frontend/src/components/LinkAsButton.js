@@ -20,7 +20,7 @@ const LinkAsButton = (props) => {
 
     return (
         <Link to={props.to}
-            className={color + props.additional}>
+            className={color + " " + props.additional}>
             {props.text}
         </Link>
     );
