@@ -3,6 +3,7 @@ import { ClockIcon, LocationMarkerIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import LinkAsButton from "./LinkAsButton";
+import SubGenreLink from "./SubGenreLink";
 
 const ExploreItem = (props) => {
     return (
@@ -14,9 +15,9 @@ const ExploreItem = (props) => {
             </div>
             <p>הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה </p>
             <div className="space-x-2">
-                <span className="bg-gray-400/50 rounded-md px-2 py-1">CSS</span>
-                <span className="bg-gray-400/50 rounded-md px-2 py-1">HTML</span>
-                <span className="bg-gray-400/50 rounded-md px-2 py-1">JAVASCRIPT</span>
+                <SubGenreLink to="/sub-genre/css" text="CSS" />
+                <SubGenreLink to="/sub-genre/HTML" text="HTML" />
+                <SubGenreLink to="/sub-genre/JAVASCRIPT" text="JAVASCRIPT" />
             </div>
             <div className="mt-8 flex justify-between relative">
                 {props.editable && <Button text={<div className="flex">עריכה<PencilIcon className="w-6 h-6" /></div>} />}
