@@ -1,6 +1,13 @@
+import { useEffect } from "react";
 import ExploreItem from "../components/ExploreItem";
 
 const Explore = () => {
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
+
     return (
         <div className="px-4">
             <div className="text-center">

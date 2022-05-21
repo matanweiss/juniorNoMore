@@ -30,7 +30,7 @@ const Home = () => {
                     פרוייקטים ממוקדים ויד ביד המאפשרת צמיחה לקידום עסקים קטנים ובינונים.</p>
 
             </div>
-            <div className="lg:pb-32 px-4 bg-slate-100">
+            <div className="lg:pb-32 px-4 bg-slate-100 overflow-hidden">
                 <h2 className="text-center text-2xl p-12">המוסדות שעובדים איתנו</h2>
                 <div className="hidden lg:flex justify-evenly">
                     <img src={logo1} alt="" />
@@ -38,7 +38,7 @@ const Home = () => {
                     <img src={logo3} alt="" />
                     <img src={logo4} alt="" />
                 </div>
-                <div className="flex gap-8 lg:hidden animate-scroll">
+                <div className="flex gap-8 lg:hidden animate-scroll ">
                     <img src={logo1} alt="" />
                     <img src={logo2} alt="" />
                     <img src={logo3} alt="" />
