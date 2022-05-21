@@ -1,30 +1,37 @@
-import { PencilIcon } from "@heroicons/react/solid";
 import { ClockIcon, LocationMarkerIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import LinkAsButton from "./LinkAsButton";
 import SubGenreLink from "./SubGenreLink";
 
 const ExploreItem = (props) => {
+
+    const data = {
+        id: '4',
+        title: 'כותרת',
+        location: 'מיקום המשרה',
+        hours: 'שעות המשרה',
+        details: 'פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה פרטי המשרה ',
+        subGenres: ['HTML', 'CSS', 'JAVASCRIPT'],
+    }
+
+    const renderSubGenres = () => data.subGenres.map(subGenre =>
+        <SubGenreLink key={subGenre} to={`/sub-genre/${subGenre}`} text={subGenre} />
+    )
+
     return (
         <div className=" bg-gray-200 rounded-xl p-4 shadow-lg max-w-4xl mx-auto">
-            <h4 className="text-center"> מודעה </h4>
+            <h4 className="text-center">{data.title}</h4>
             <div className="flex flex-col my-2 gap-2">
-                <span className="flex"><LocationMarkerIcon className="w-6 h-6" />מיקום המשרה</span>
-                <span className="flex"><ClockIcon className="w-6 h-6" />שעות המשרה</span>
+                <span className="flex gap-2"><LocationMarkerIcon className="w-6 h-6" />{data.location}</span>
+                <span className="flex gap-2"><ClockIcon className="w-6 h-6" />{data.hours}</span>
             </div>
-            <p>הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה </p>
+            <p className="mb-4">{data.details}</p>
             <div className="space-x-2">
-                <SubGenreLink to="/sub-genre/css" text="CSS" />
-                <SubGenreLink to="/sub-genre/HTML" text="HTML" />
-                <SubGenreLink to="/sub-genre/JAVASCRIPT" text="JAVASCRIPT" />
+                {renderSubGenres()}
             </div>
-            <div className="mt-8 flex justify-between relative">
-                {props.editable && <Button text={<div className="flex">עריכה<PencilIcon className="w-6 h-6" /></div>} />}
-                <div className="absolute inset-x-0 text-center">
-                    <LinkAsButton to="/job/4" text={"פרטים נוספים"} />
-                </div>
-                <Button text={"הגשת מועמדות"} additionalClasses={`${props.applicable ? '' : 'opacity-0'}`} />
+            <div className="mt-8 flex gap-4 lg:flex-row flex-col justify-between relative">
+                <LinkAsButton to="/job/4" secondary={true} text={"פרטים נוספים"} />
+                {props.applicable && <Button text="הגשת מועמדות" />}
             </div>
         </div>
     );
