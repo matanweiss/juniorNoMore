@@ -1,5 +1,6 @@
 import { ClockIcon, LocationMarkerIcon } from "@heroicons/react/outline";
 import { PencilIcon } from "@heroicons/react/solid";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import AppliedUser from "../components/AppliedUser";
 import Button from "../components/Button";
@@ -37,7 +38,9 @@ const Job = () => {
 
 
 
-
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
 
     return (
         <div className="px-4">

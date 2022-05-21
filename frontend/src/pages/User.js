@@ -33,7 +33,7 @@ const User = () => {
                         <UserIcon className="w-16 h-16 stroke-1" />
                     </div>
                     <EditableText element={title} isEditing={isEditing} additional="lg:text-4xl text-2xl" />
-                    <span className="mr-auto flex gap-4">
+                    <span className="hidden lg:flex mr-auto gap-4">
                         {isEditing && <Button text={<div className="flex">שמירה<CheckIcon className="w-6 h-6" /></div>} />}
                         <Button action={() => { setIsEditing(!isEditing) }}
                             text={isEditing
@@ -45,6 +45,14 @@ const User = () => {
                 <EditableText element={about} isEditing={isEditing} />
                 <div className="space-x-2">
                     {renderSubGenres()}
+                </div>
+                <div className="lg:hidden flex justify-between">
+                    <Button action={() => { setIsEditing(!isEditing) }}
+                        text={isEditing
+                            ? <div className="flex">ביטול<XIcon className="w-6 h-6" /></div>
+                            : <div className="flex">עריכה<PencilIcon className="w-6 h-6" /></div>}
+                    />
+                    {isEditing && <Button text={<div className="flex">שמירה<CheckIcon className="w-6 h-6" /></div>} />}
                 </div>
             </div>
         </div>
