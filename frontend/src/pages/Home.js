@@ -67,8 +67,8 @@ const Home = () => {
                 <div className="grid grid-cols-2 gap-y-16 place-items-center mt-24 lg:hidden">
                     <Link to="/" className=''>דף הבית</Link>
                     <Link to="/explore" className=''>משרות</Link>
-                    <Link to="/" className=''>צור קשר</Link>
                     <Link to="/" className=''>שאלות ותשובות</Link>
+                    <Link to="/" className=''>צור קשר</Link>
                 </div>
             </div>
         </>

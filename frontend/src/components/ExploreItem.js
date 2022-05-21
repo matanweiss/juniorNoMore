@@ -1,12 +1,17 @@
 import { PencilIcon } from "@heroicons/react/solid";
+import { ClockIcon, LocationMarkerIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import LinkAsButton from "./LinkAsButton";
 
 const ExploreItem = (props) => {
     return (
-        <div className=" bg-gray-200 rounded-xl p-4 shadow-lg">
+        <div className=" bg-gray-200 rounded-xl p-4 shadow-lg max-w-4xl mx-auto">
             <h4 className="text-center"> מודעה </h4>
+            <div className="flex flex-col my-2 gap-2">
+                <span className="flex"><LocationMarkerIcon className="w-6 h-6" />מיקום המשרה</span>
+                <span className="flex"><ClockIcon className="w-6 h-6" />שעות המשרה</span>
+            </div>
             <p>הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה הסבר על המודעה </p>
             <div className="space-x-2">
                 <span className="bg-gray-400/50 rounded-md px-2 py-1">CSS</span>

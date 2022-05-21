@@ -23,7 +23,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <nav className={` ${isScrolled ? 'text-white bg-slate-700 lg:pt-4 lg:-translate-y-4' : "lg:max-h-24"} h-16 lg:h-24 z-10 sticky top-0 transition-all px-8 flex items-center`}>
+        <nav className={` ${isScrolled ? 'text-white bg-slate-700 lg:pt-8 lg:-translate-y-8' : "lg:max-h-24"} h-16 lg:h-24 z-10 sticky top-0 transition-all px-8 flex items-center`}>
             <Link to="/" className="text-2xl font-bold flex flex-col items-center">
                 <div className="translate-x-8 lg:translate-x-0">
                     {isScrolled
@@ -34,8 +34,8 @@ const NavBar = () => {
             </Link>
             <Link to="/" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline mr-16 ml-8`}>דף הבית</Link>
             <Link to="/explore" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>משרות</Link>
-            <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>צור קשר</Link>
-            <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline `}>שאלות ותשובות</Link>
+            <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>שאלות ותשובות</Link>
+            <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline`}>צור קשר</Link>
 
             <div className="mr-auto flex gap-6">
 
