@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/juniorNoMore/static/css/main.7bbbcc63.css",
-    "main.js": "/juniorNoMore/static/js/main.dbf891de.js",
+    "main.css": "/juniorNoMore/static/css/main.85cd7132.css",
+    "main.js": "/juniorNoMore/static/js/main.7cac4534.js",
     "static/media/logo3.svg": "/juniorNoMore/static/media/logo3.c11d6d7914d9234d8c1eab28bc602c73.svg",
     "static/media/logo2.svg": "/juniorNoMore/static/media/logo2.f1740e95dada461c43cd2405671f2c52.svg",
     "static/media/logoWhite.png": "/juniorNoMore/static/media/logoWhite.8b5351bce8f20570a845.png",
@@ -9,11 +9,11 @@
     "static/media/logo4.svg": "/juniorNoMore/static/media/logo4.63174ecd1402e158017f50898f0ff902.svg",
     "static/media/logo1.svg": "/juniorNoMore/static/media/logo1.89cf3ce57d294bc18398a4a2dea8d95a.svg",
     "index.html": "/juniorNoMore/index.html",
-    "main.7bbbcc63.css.map": "/juniorNoMore/static/css/main.7bbbcc63.css.map",
-    "main.dbf891de.js.map": "/juniorNoMore/static/js/main.dbf891de.js.map"
+    "main.85cd7132.css.map": "/juniorNoMore/static/css/main.85cd7132.css.map",
+    "main.7cac4534.js.map": "/juniorNoMore/static/js/main.7cac4534.js.map"
   },
   "entrypoints": [
-    "static/css/main.7bbbcc63.css",
-    "static/js/main.dbf891de.js"
+    "static/css/main.85cd7132.css",
+    "static/js/main.7cac4534.js"
   ]
 }
