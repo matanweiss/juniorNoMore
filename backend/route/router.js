@@ -7,25 +7,28 @@ const authToken = require('../Middlewares/authentication');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 db2.connect();
-router.post('/register-junior',authToken, async (req, res)  => {
+router.post('/register-junior', async (req, res)  => {
     try{
+        const password =  await bcrypt.hash(req.body.password,10);
+        //console.log(password);
        // var id = db.escape(req.body.id);
        // console.log(id);
+       //console.log(req.body.mail)
        let result = await db2.runQuery(
-           'SELECT * FROM users WHERE mail = '+ db.escape(req.body.mail));
-       console.log(result);
-        bcrypt.hash(req.body.password, 10, (err, hash) => {
-            if(err){
-                res.send('cannot encrypt');
-            }
-        })
-        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES (`' + db.escape(req.body.firstName) +'`,`' + db.escape(req.body.lastName) +'`,`' + db.escape(req.body.mail) +'`,`'+ db.escape(hash) +'`,`'+ db.escape(req.body.isJunior) +'`)`');
-        console.log(result);
-        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES (`' + db.escape(req.body.firstName) +'`,`' + db.escape(req.body.lastName) +'`,`' + db.escape(req.body.mail) +'`,`'+ db.escape(hash) +'`,`'+ db.escape(req.body.isJunior) +'`)`');
-        console.log(result);
-        result = await db2.runQuery('SELECT `id` FROM users where mail = ' + db.escape(req.body.mail));
+           "SELECT * FROM users WHERE mail = "+db.escape(req.body.mail)+"");
+        //console.log(result);
+        if(result.length>0){
+            console.log("exited");
+            res.send("cannot register");
+            return;
+        }
+        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES ('+ db.escape(req.body.firstName)+',' + db.escape(req.body.lastName) +`,` + db.escape(req.body.mail) +`,`+ db.escape(password) +`,`+ db.escape(req.body.isJunior) +`)`);
+        //console.log(result);
+        result = await db2.runQuery('SELECT `id` FROM users where mail = ' + db.escape(req.body.mail)+';');
+        console.log(result[0].id);
+        const user_id  = result[0].id;
         result= await db2.runQuery(
-            'INSERT INTO `juniors`( `user_id`, `phone`, `degree`, `academy`, `linkedin`, `skill1`, `skill2`, `skill3`, `personalNote`) VALUES (' + db.escape(result.body.id)+','+ db.escape(req.body.phone)+','+ db.escape(req.body.degree)+','+ db.escape(req.body.academy)+','+ db.escape(req.body.skill1)+','+ db.escape(req.body.skill2)+','+ db.escape(req.body.skill3)+','+ db.escape(req.body.personalNote)+');'
+            'INSERT INTO `juniors`( `user_id`, `phone`, `degree`, `academy`, `linkedin`, `skill1`, `skill2`, `skill3`, `personalNote`) VALUES (' + db.escape(user_id)+','+ db.escape(req.body.phone)+','+ db.escape(req.body.degree)+','+ db.escape(req.body.academy)+','+db.escape(req.body.linkedin)+','+ db.escape(req.body.skill1)+','+ db.escape(req.body.skill2)+','+ db.escape(req.body.skill3)+','+ db.escape(req.body.personalNote)+');'
         );
         console.log(result);
         let juniorsInfo = db2.extractDbResult(result);
