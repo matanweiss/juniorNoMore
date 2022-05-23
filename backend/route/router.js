@@ -39,6 +39,35 @@ router.post('/register-junior', async (req, res) => {
         res.status(409).send(JSON.stringify(e));
     }
 });
+
+router.post('/register-business', async (req, res) => {
+    try {
+        console.log(req.body);
+        const password = await bcrypt.hash(req.body.password, 10);
+        //console.log(password);
+        // var id = db.escape(req.body.id);
+        // console.log(id);
+        //console.log(req.body.mail)
+        let result = await db2.runQuery(
+            "SELECT * FROM users WHERE mail = " + db.escape(req.body.mail) + "");
+        //console.log(result);
+        if (result.length > 0) {
+            console.log("exited");
+            throw "קיים משתמש עם פרטים אלו";
+        }
+        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES (' + db.escape(req.body.firstName) + ',' + db.escape(req.body.lastName) + `,` + db.escape(req.body.mail) + `,` + db.escape(password) + `,` + db.escape(req.body.isJunior) + `)`);
+        //console.log(result);
+
+        console.log(result);
+        let juniorsInfo = db2.extractDbResult(result);
+        res.send(juniorsInfo);
+    }
+
+
+    catch (e) {
+        res.status(409).send(JSON.stringify(e));
+    }
+});
 // router.post('/register-junior',  (req, res) => {  
 //     db.query(
 //         `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import InputMail from "../components/InputMail";
 import InputPassword from "../components/InputPassword";
@@ -14,12 +14,15 @@ import { useMutation } from "react-query";
 
 const Register = () => {
 
+    const [userType, setUserType] = useState('junior');
+
+
     const mutation = useMutation(() => {
-        return fetch('http://localhost:4500/api/register-junior', {
+        return fetch(`http://localhost:4500/api/register-${userType}`, {
             method: 'post',
             body: userType === 'junior'
                 ? JSON.stringify({ skill1: null, skill2: null, skill3: null, phone: "054", isJunior: true, firstName: name, lastName: name, mail: email, password, personalNote, degree, academy, linkedin })
-                : JSON.stringify({ isJunior: false, name, email, password }),
+                : JSON.stringify({ isJunior: false, firstName: name, lastName: name, mail: email, password }),
             headers: { 'Content-Type': 'application/json' }
         })
     }, {
@@ -30,8 +33,8 @@ const Register = () => {
                 return navigate("/first-login");
             }
             else {
-                res.json().then(id => {
-                    toast.warning(id);
+                res.json().then(msg => {
+                    toast.warning(msg);
                     setIsSecondPage(false);
                 })
             }
@@ -42,7 +45,6 @@ const Register = () => {
 
     const navigate = useNavigate();
     const [isSecondPage, setIsSecondPage] = useState(false);
-    const [userType, setUserType] = useState('junior');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -51,14 +53,10 @@ const Register = () => {
     const [isDegree, setIsDegree] = useState(true);
     const [degree, setDegree] = useState('');
     const [academy, setAcademy] = useState('');
-    const [city, setCity] = useState('');
-    const [field, setField] = useState('');
-    const [website, setWebsite] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(process.env.REACT_APP_SERVER_BASE_URL + '/register-' + userType === 'junior' ? 'junior' : 'business');
-        if (!isSecondPage) {
+        if (!isSecondPage && userType === 'junior') {
             setIsSecondPage(true);
             return;
         }
@@ -77,37 +75,29 @@ const Register = () => {
             <Button text="הבא" additionalClasses=" w-full" />
         </div>
 
-    const renderSecondPage = () => {
-        if (userType === 'junior') return (
-            <>
-                <div className="flex gap-16">
-                    <div className="space-y-12">
-                        <InputTextarea text="ספר לנו על עצמך" name="personalNote" value={personalNote} setValue={setPersonalNote} />
-                        <InputText name="linkedin" text="קישור ל- LinkedIn" value={linkedin} setValue={setLinkedin} />
-                    </div>
-                    <div className="space-y-4">
-                        <InputCheckbox text="יש לך תואר / בלימודים" name="isDegree" isChecked={isDegree} onCheck={setIsDegree} />
-                        {isDegree &&
-                            <div className="space-y-10 pt-4">
-                                <InputSearch description="תואר" data={degrees} setValue={setDegree} />
-                                <InputSearch description="מוסד לימודים" data={universities} setValue={setAcademy} />
-                            </div>
-                        }
-                    </div>
+    const renderSecondPage = () =>
+        <>
+            <div className="flex gap-16">
+                <div className="space-y-12">
+                    <InputTextarea text="ספר לנו על עצמך" name="personalNote" value={personalNote} setValue={setPersonalNote} />
+                    <InputText name="linkedin" text="קישור ל- LinkedIn" value={linkedin} setValue={setLinkedin} />
                 </div>
-                <div className="mt-8 text-center">
-                    <Button text="הרשמה" />
+                <div className="space-y-4">
+                    <InputCheckbox text="יש לך תואר / בלימודים" name="isDegree" isChecked={isDegree} onCheck={setIsDegree} />
+                    {isDegree &&
+                        <div className="space-y-10 pt-4">
+                            <InputSearch description="תואר" data={degrees} setValue={setDegree} />
+                            <InputSearch description="מוסד לימודים" data={universities} setValue={setAcademy} />
+                        </div>
+                    }
                 </div>
-            </>
-        )
-        else return (
-            <div className="space-y-8">
-                <InputText name="city" text="עיר" value={city} setValue={setCity} />
-                <InputText name="field" text="תחום העסק" value={field} setValue={setField} />
-                <InputText name="website" text="אתר העסק" value={website} setValue={setWebsite} />
+            </div>
+            <div className="mt-8 text-center">
                 <Button text="הרשמה" />
-            </div>)
-    }
+            </div>
+        </>
+
+
 
 
     return (
