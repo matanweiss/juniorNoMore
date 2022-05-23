@@ -55,7 +55,11 @@ router.post('/update-user', authToken, async (req, res) => {
         );
         console.log(result);
         result = await db2.runQuery(
+<<<<<<< HEAD
             "UPDATE juniors SET `personalNote` = " + db2.escape(req.body.personalNote) + ",`linkedin` = " + db2.escape(req.body.linkedin) + ",`academy` = " + db2.escape(req.body.academy) + ", `degree` = " + db2.escape(req.body.degree) + ",`phone` = " + db2.escape(req.body.phone) + ",`skill1`=" + db2.escape(req.body.skill1) + ",`skill2`=" + db2.escape(req.body.skill2) + ",`skill3`=" + db2.escape(req.body.skill3) + " WHERE id = " + db2.escape(req.body.id) + '"'
+=======
+            "UPDATE juniors SET `personalNote` = " + db2.escape(req.body.personalNote)+",`linkedin` = " +db2.escape(req.body.linkedin)+",`academy` = "+db2.escape(req.body.academy) +", `degree` = "+ db2.escape(req.body.degree)+",`phone` = " + db2.escape(req.body.phone)+",`skill1`="+ db2.escape(req.body.skill1)+",`skill2`="+db2.escape(req.body.skill2)+",`skill3`="+db2.escape(req.body.skill3)+" WHERE user_id = "+ db2.escape(req.body.id)+'"' 
+>>>>>>> bc28c1b80549dbae4299078d264fc02848ef6be6
         );
         console.log(result);
         res.status(200).send("updated");
@@ -249,7 +253,7 @@ router.post('/delete-user', authToken, async (req, res) => {
         res.send(e);
     }
 });
-router.post('/update-junior-info', authToken, async (req, res) => {
+router.post('/delete-junior-info', authToken, async (req, res) => {
     try {
         //    var id = db.escape(req.body.id);
         //    console.log(id);
@@ -264,7 +268,7 @@ router.post('/update-junior-info', authToken, async (req, res) => {
         console.log(result);
 
         //let juniorsInfo = db2.extractDbResult(result);
-        res.send("Deleted");
+        res.send("updated");
     }
     catch (e) {
         res.send(e);
