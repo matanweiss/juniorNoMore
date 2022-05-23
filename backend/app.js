@@ -4,20 +4,20 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRouter = require('./route/router');
- 
+
 const app = express();
- 
+
 app.use(express.json());
- 
+
 app.use(bodyParser.json());
- 
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
- 
+
 app.use(cors());
 
 app.use('/api', userRouter);
 
- 
-app.listen(4500,() => console.log('Server is running on port 4500'));
+
+app.listen(4500, () => console.log('Server is running on port 4500'));
