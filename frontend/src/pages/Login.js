@@ -23,6 +23,7 @@ const Login = (props) => {
                     localStorage.setItem('jwt', data.token);
                     localStorage.setItem('id', data.user.id);
                     localStorage.setItem('isJunior', data.user.isJunior);
+                    localStorage.setItem('name', data.user.firstName + " " + data.user.lastName);
                     props.setIsLoggedIn(true);
                     return navigate("/explore");
                 })

@@ -1,5 +1,5 @@
+import { UserIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import logoBlack from "../assets/logoBlack.png"
@@ -11,9 +11,7 @@ const NavBar = (props) => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     const handleLogout = () => {
-        localStorage.setItem('jwt', '');
-        localStorage.setItem('id', '');
-        localStorage.setItem('isJunior', '');
+        localStorage.clear();
         props.setIsLoggedIn(false);
         toast.success('התנתקת בהצלחה');
         return navigate("/login");
@@ -51,7 +49,15 @@ const NavBar = (props) => {
 
             <div className="mr-auto flex gap-6">
                 {props.isLoggedIn
-                    ? <button onClick={handleLogout} className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התנתק</button>
+                    ? <>
+                        <Link to={`/user/${localStorage.getItem('id')}`} className="flex items-center lg:ml-4 gap-4 ">
+                            <div className="hidden rounded-full border-2 border-black w-12 h-12 lg:grid place-items-center">
+                                <UserIcon className="w-8 h-8" />
+                            </div>
+                            <span>{localStorage.getItem('name')}</span>
+                        </Link>
+                        <button onClick={handleLogout} className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התנתק</button>
+                    </>
                     : <>
                         <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התחברות</Link>
                         <Link to="/register" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>הרשמה</Link>
