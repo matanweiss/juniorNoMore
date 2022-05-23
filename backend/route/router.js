@@ -7,38 +7,37 @@ const authToken = require('../Middlewares/authentication');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 db2.connect();
-router.post('/register-junior', async (req, res)  => {
-    try{
-        const password =  await bcrypt.hash(req.body.password,10);
+router.post('/register-junior', async (req, res) => {
+    try {
+        const password = await bcrypt.hash(req.body.password, 10);
         //console.log(password);
-       // var id = db.escape(req.body.id);
-       // console.log(id);
-       //console.log(req.body.mail)
-       let result = await db2.runQuery(
-           "SELECT * FROM users WHERE mail = "+db.escape(req.body.mail)+"");
+        // var id = db.escape(req.body.id);
+        // console.log(id);
+        //console.log(req.body.mail)
+        let result = await db2.runQuery(
+            "SELECT * FROM users WHERE mail = " + db.escape(req.body.mail) + "");
         //console.log(result);
-        if(result.length>0){
+        if (result.length > 0) {
             console.log("exited");
-            res.send("cannot register");
-            return;
+            throw "קיים משתמש עם פרטים אלו";
         }
-        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES ('+ db.escape(req.body.firstName)+',' + db.escape(req.body.lastName) +`,` + db.escape(req.body.mail) +`,`+ db.escape(password) +`,`+ db.escape(req.body.isJunior) +`)`);
+        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES (' + db.escape(req.body.firstName) + ',' + db.escape(req.body.lastName) + `,` + db.escape(req.body.mail) + `,` + db.escape(password) + `,` + db.escape(req.body.isJunior) + `)`);
         //console.log(result);
-        result = await db2.runQuery('SELECT `id` FROM users where mail = ' + db.escape(req.body.mail)+';');
+        result = await db2.runQuery('SELECT `id` FROM users where mail = ' + db.escape(req.body.mail) + ';');
         console.log(result[0].id);
-        const user_id  = result[0].id;
-        result= await db2.runQuery(
-            'INSERT INTO `juniors`( `user_id`, `phone`, `degree`, `academy`, `linkedin`, `skill1`, `skill2`, `skill3`, `personalNote`) VALUES (' + db.escape(user_id)+','+ db.escape(req.body.phone)+','+ db.escape(req.body.degree)+','+ db.escape(req.body.academy)+','+db.escape(req.body.linkedin)+','+ db.escape(req.body.skill1)+','+ db.escape(req.body.skill2)+','+ db.escape(req.body.skill3)+','+ db.escape(req.body.personalNote)+');'
+        const user_id = result[0].id;
+        result = await db2.runQuery(
+            'INSERT INTO `juniors`( `user_id`, `phone`, `degree`, `academy`, `linkedin`, `skill1`, `skill2`, `skill3`, `personalNote`) VALUES (' + db.escape(user_id) + ',' + db.escape(req.body.phone) + ',' + db.escape(req.body.degree) + ',' + db.escape(req.body.academy) + ',' + db.escape(req.body.linkedin) + ',' + db.escape(req.body.skill1) + ',' + db.escape(req.body.skill2) + ',' + db.escape(req.body.skill3) + ',' + db.escape(req.body.personalNote) + ');'
         );
         console.log(result);
         let juniorsInfo = db2.extractDbResult(result);
         res.send(juniorsInfo);
     }
-        
-    
-  catch(e){
-       res.send(e);
-   }
+
+
+    catch (e) {
+        res.status(409).send(JSON.stringify(e));
+    }
 });
 // router.post('/register-junior',  (req, res) => {  
 //     db.query(
@@ -102,7 +101,7 @@ router.post('/login', (req, res, next) => {
     db.query(
         `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(
             req.body.email
-            )})`,
+        )})`,
         (err, result) => {
             // user does not exists
             if (err) {
@@ -116,7 +115,7 @@ router.post('/login', (req, res, next) => {
                     msg: 'Email or password is incorrect!'
                 });
             }
-            
+
             // check password
             bcrypt.compare(
                 req.body.password,
@@ -142,91 +141,91 @@ router.post('/login', (req, res, next) => {
                     });
                 }
             );
-         }
+        }
     );
     //res.send("hello");
 });
-router.get('/get-juniors',authToken, async (req, res)  => {
+router.get('/get-juniors', authToken, async (req, res) => {
 
-         //res.send("hello world");
-          try{
-            let result = await db2.runQuery(
-                'SELECT * FROM `juniors` INNER JOIN (SELECT `firstName`,`lastName`,`mail`,`id` FROM users) as users ON users.id = juniors.user_id;'
-                );
-            console.log(result);
-            let juniorsInfo = db2.extractDbResult(result);
-            res.send(juniorsInfo);
-         }
-        catch(e){
-             res.send(e);
-         }
-});
-router.post('/get-user',authToken, async (req, res)  => {
-     try{
-        // var id = db.escape(req.body.id);
-        // console.log(id);
+    //res.send("hello world");
+    try {
         let result = await db2.runQuery(
-            'SELECT * FROM juniors INNER JOIN (SELECT `firstName`,`lastName`,`mail`,`id` FROM users) as users ON users.id = juniors.user_id WHERE LOWER(user_id) = '+ db.escape(req.body.id));
+            'SELECT * FROM `juniors` INNER JOIN (SELECT `firstName`,`lastName`,`mail`,`id` FROM users) as users ON users.id = juniors.user_id;'
+        );
         console.log(result);
         let juniorsInfo = db2.extractDbResult(result);
         res.send(juniorsInfo);
     }
-   catch(e){
+    catch (e) {
         res.send(e);
     }
 });
-router.post('/delete-user',authToken, async (req, res)  => {
-    try{
-    //    var id = db.escape(req.body.id);
-    //    console.log(id);
-       let result = await db2.runQuery(
-        'DELETE FROM juniors WHERE user_id ='+db.escape(req.body.id));
-       console.log(result);
-        result = await db2.runQuery(
-        'DELETE FROM users WHERE id ='+db.escape(req.body.id));
+router.post('/get-user', authToken, async (req, res) => {
+    try {
+        // var id = db.escape(req.body.id);
+        // console.log(id);
+        let result = await db2.runQuery(
+            'SELECT * FROM juniors INNER JOIN (SELECT `firstName`,`lastName`,`mail`,`id` FROM users) as users ON users.id = juniors.user_id WHERE LOWER(user_id) = ' + db.escape(req.body.id));
         console.log(result);
-        result = await db2.runQuery(
-            'DELETE FROM project WHERE publisher_id ='+db.escape(req.body.id));
-        console.log(result);
-            
-       //let juniorsInfo = db2.extractDbResult(result);
-       res.send("Deleted");
-   }
-  catch(e){
-       res.send(e);
-   }
+        let juniorsInfo = db2.extractDbResult(result);
+        res.send(juniorsInfo);
+    }
+    catch (e) {
+        res.send(e);
+    }
 });
-router.post('/update-junior-info',authToken, async (req, res)  => {
-    try{
-    //    var id = db.escape(req.body.id);
-    //    console.log(id);
-       let result = await db2.runQuery(
-        'DELETE FROM juniors WHERE user_id ='+db.escape(req.body.id));
-       console.log(result);
-        result = await db2.runQuery(
-        'DELETE FROM users WHERE id ='+db.escape(req.body.id));
+router.post('/delete-user', authToken, async (req, res) => {
+    try {
+        //    var id = db.escape(req.body.id);
+        //    console.log(id);
+        let result = await db2.runQuery(
+            'DELETE FROM juniors WHERE user_id =' + db.escape(req.body.id));
         console.log(result);
         result = await db2.runQuery(
-            'DELETE FROM project WHERE publisher_id ='+db.escape(req.body.id));
+            'DELETE FROM users WHERE id =' + db.escape(req.body.id));
         console.log(result);
-            
-       //let juniorsInfo = db2.extractDbResult(result);
-       res.send("Deleted");
-   }
-  catch(e){
-       res.send(e);
-   }
+        result = await db2.runQuery(
+            'DELETE FROM project WHERE publisher_id =' + db.escape(req.body.id));
+        console.log(result);
+
+        //let juniorsInfo = db2.extractDbResult(result);
+        res.send("Deleted");
+    }
+    catch (e) {
+        res.send(e);
+    }
 });
-router.get('/get-projects',authToken, async (req, res)  => {
+router.post('/update-junior-info', authToken, async (req, res) => {
+    try {
+        //    var id = db.escape(req.body.id);
+        //    console.log(id);
+        let result = await db2.runQuery(
+            'DELETE FROM juniors WHERE user_id =' + db.escape(req.body.id));
+        console.log(result);
+        result = await db2.runQuery(
+            'DELETE FROM users WHERE id =' + db.escape(req.body.id));
+        console.log(result);
+        result = await db2.runQuery(
+            'DELETE FROM project WHERE publisher_id =' + db.escape(req.body.id));
+        console.log(result);
+
+        //let juniorsInfo = db2.extractDbResult(result);
+        res.send("Deleted");
+    }
+    catch (e) {
+        res.send(e);
+    }
+});
+router.get('/get-projects', authToken, async (req, res) => {
 
     //res.send("hello world");
-     try{
-       let result = await db2.runQuery('SELECT * FROM project');
-       console.log(result);
-       let projectsInfo = db2.extractDbResult(result);
-       res.send(projectsInfo);
+    try {
+        let result = await db2.runQuery('SELECT * FROM project');
+        console.log(result);
+        let projectsInfo = db2.extractDbResult(result);
+        res.send(projectsInfo);
     }
-   catch(e){
+    catch (e) {
         res.send(e);
     }
 });

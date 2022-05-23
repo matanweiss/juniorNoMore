@@ -18,13 +18,13 @@ function connect() {
 
     return new Promise((resolve, reject) => {
         connection.connect((err) => { err ? reject(err) : resolve(); });
-    });   
+    });
 }
 
 function disconnect() {
     return new Promise((resolve, reject) => {
         connection.end((err) => { err ? reject(err) : resolve(); });
-    });   
+    });
 }
 
 
@@ -47,7 +47,7 @@ function runQueryWithParam(queryParam, queryValues) {
 }
 
 function extractDbResult(res) {
-    return JSON.parse((JSON.stringify(res)).replace("RowDataPacket",""));
+    return JSON.parse((JSON.stringify(res)).replace("RowDataPacket", ""));
 }
 
 

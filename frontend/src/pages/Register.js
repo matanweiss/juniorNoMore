@@ -15,19 +15,27 @@ import { useMutation } from "react-query";
 const Register = () => {
 
     const mutation = useMutation(() => {
-        return fetch(process.env.REACT_APP_SERVER_BASE_URL + '/register-' + userType === 'junior' ? 'junior' : 'business', {
+        return fetch('http://localhost:4500/api/register-junior', {
             method: 'post',
             body: userType === 'junior'
-                ? JSON.stringify({ name, email, password, personalNote, degree, academy, linkedin })
-                : JSON.stringify({ name, email, password }),
+                ? JSON.stringify({ skill1: null, skill2: null, skill3: null, phone: "054", isJunior: true, firstName: name, lastName: name, mail: email, password, personalNote, degree, academy, linkedin })
+                : JSON.stringify({ isJunior: false, name, email, password }),
             headers: { 'Content-Type': 'application/json' }
         })
     }, {
-        onSuccess: user => user.json().then(user => {
-            console.log(user);
-            toast.success('נרשמת למערכת בהצלחה');
-            return navigate("/first-login");
-        })
+        onSuccess: res => {
+            if (res.ok) {
+                console.log(res);
+                toast.success('נרשמת למערכת בהצלחה');
+                return navigate("/first-login");
+            }
+            else {
+                res.json().then(id => {
+                    toast.warning(id);
+                    setIsSecondPage(false);
+                })
+            }
+        }
     });
 
     const handleRadioChange = e => setUserType(e.target.id);
@@ -42,15 +50,14 @@ const Register = () => {
     const [linkedin, setLinkedin] = useState('');
     const [isDegree, setIsDegree] = useState(true);
     const [degree, setDegree] = useState('');
-    const [area, setArea] = useState('');
     const [academy, setAcademy] = useState('');
     const [city, setCity] = useState('');
     const [field, setField] = useState('');
     const [website, setWebsite] = useState('');
-    const [service, setService] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
+        console.log(process.env.REACT_APP_SERVER_BASE_URL + '/register-' + userType === 'junior' ? 'junior' : 'business');
         if (!isSecondPage) {
             setIsSecondPage(true);
             return;
