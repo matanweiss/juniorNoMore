@@ -7,52 +7,94 @@ const authToken = require('../Middlewares/authentication');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 db2.connect();
-router.post('/register',  (req, res) => {  
-    db.query(
-        `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(
-            req.body.email
-            )})`,
-        (err, result) => {
-            if (result.length) {
-                return res.status(409).send({
-                    msg: 'This user is already in use!'
-                });
+router.post('/register-junior',authToken, async (req, res)  => {
+    try{
+       // var id = db.escape(req.body.id);
+       // console.log(id);
+       let result = await db2.runQuery(
+           'SELECT * FROM users WHERE mail = '+ db.escape(req.body.mail));
+       console.log(result);
+        bcrypt.hash(req.body.password, 10, (err, hash) => {
+            if(err){
+                res.send('cannot encrypt');
             }
-            if (err) {
-                return res.status(403).send({ msg: ' internal problem' });
-            }
-            else {
-                // username is available
-                bcrypt.hash(req.body.password, 10, (err, hash) => {
-                    if (err) {
-                        return res.status(500).send({
-                            msg: "cannot encrypt"
-                        });
-                    } else {
-                        // has hashed pw => add to database
-                        db.query(
-                            `INSERT INTO users (firstName,lastName, mail, password,isJunior) VALUES ('${req.body.first_name}','${req.body.last_name}', ${db.escape(req.body.email)},${db.escape(hash)},'${req.body.isJunior}');`,
-                            (err, result) => {
-                                if (err) {
-                                    //throw err;
-                                    return res.status(400).send({
-                                        msg: err
-                                    });
-                                }
-                                else {
-                                    return res.status(201).send({
-                                        msg: 'The user has been registerd with us!'
-                                    });
-                                }
-                            }
-                        );
-                    }
-                });
-            }
-         }
-    );
-    //res.send("hello world");
+        })
+        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES (`' + db.escape(req.body.firstName) +'`,`' + db.escape(req.body.lastName) +'`,`' + db.escape(req.body.mail) +'`,`'+ db.escape(hash) +'`,`'+ db.escape(req.body.isJunior) +'`)`');
+        console.log(result);
+        result = await db2.runQuery('INSERT INTO users (`firstName`,`lastName`,`mail`,`password`,`isJunior`) VALUES (`' + db.escape(req.body.firstName) +'`,`' + db.escape(req.body.lastName) +'`,`' + db.escape(req.body.mail) +'`,`'+ db.escape(hash) +'`,`'+ db.escape(req.body.isJunior) +'`)`');
+        console.log(result);
+        result = await db2.runQuery('SELECT `id` FROM users where mail = ' + db.escape(req.body.mail));
+        result= await db2.runQuery(
+            'INSERT INTO `juniors`( `user_id`, `phone`, `degree`, `academy`, `linkedin`, `skill1`, `skill2`, `skill3`, `personalNote`) VALUES (' + db.escape(result.body.id)+','+ db.escape(req.body.phone)+','+ db.escape(req.body.degree)+','+ db.escape(req.body.academy)+','+ db.escape(req.body.skill1)+','+ db.escape(req.body.skill2)+','+ db.escape(req.body.skill3)+','+ db.escape(req.body.personalNote)+');'
+        );
+        console.log(result);
+        let juniorsInfo = db2.extractDbResult(result);
+        res.send(juniorsInfo);
+    }
+        
+    
+  catch(e){
+       res.send(e);
+   }
 });
+// router.post('/register-junior',  (req, res) => {  
+//     db.query(
+//         `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(
+//             req.body.email
+//             )})`,
+//         (err, result) => {
+//             if (result.length) {
+//                 return res.status(409).send({
+//                     msg: 'This user is already in use!'
+//                 });
+//             }
+//             if (err) {
+//                 return res.status(403).send({ msg: ' internal problem' });
+//             }
+//             else {
+//                 // username is available
+//                 bcrypt.hash(req.body.password, 10, (err, hash) => {
+//                     if (err) {
+//                         return res.status(500).send({
+//                             msg: "cannot encrypt"
+//                         });
+//                     } else {
+//                         // has hashed pw => add to database
+//                         db.query(
+//                             `INSERT INTO users (firstName,lastName, mail, password,isJunior) VALUES ('${req.body.first_name}','${req.body.last_name}', ${db.escape(req.body.email)},${db.escape(hash)},'${req.body.isJunior}');`,
+//                             (err, result) => {
+//                                 if (err) {
+//                                     //throw err;
+//                                     return res.status(400).send({
+//                                         msg: err
+//                                     });
+//                                 }
+//                                 else {
+//                                     db.query('SELECT * FROM users where mail = ${db.escape(req.body.email)} ;', (err,res)=>{
+//                                         if(err){
+//                                             return res.status(400).send({
+//                                                 msg: err
+//                                         }
+//                                         else{
+//                                             //db.query('INSERT INTO juniors('user_id', `phone`, `degree`, `academy`, `linkedin`, `skill1`, `skill2`, `skill3`, `personalNote`) VALUES (${res.body.id}'))
+
+//                                         }
+//                                     }
+
+//                                      )
+//                                     return res.status(201).send({
+//                                         msg: 'The user has been registerd with us!'
+//                                     });
+//                                 }
+//                             }
+//                         );
+//                     }
+//                 });
+//             }
+//          }
+//     );
+//     //res.send("hello world");
+// });
 router.post('/login', (req, res, next) => {
     db.query(
         `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(
@@ -131,6 +173,27 @@ router.post('/get-user',authToken, async (req, res)  => {
     }
 });
 router.post('/delete-user',authToken, async (req, res)  => {
+    try{
+    //    var id = db.escape(req.body.id);
+    //    console.log(id);
+       let result = await db2.runQuery(
+        'DELETE FROM juniors WHERE user_id ='+db.escape(req.body.id));
+       console.log(result);
+        result = await db2.runQuery(
+        'DELETE FROM users WHERE id ='+db.escape(req.body.id));
+        console.log(result);
+        result = await db2.runQuery(
+            'DELETE FROM project WHERE publisher_id ='+db.escape(req.body.id));
+        console.log(result);
+            
+       //let juniorsInfo = db2.extractDbResult(result);
+       res.send("Deleted");
+   }
+  catch(e){
+       res.send(e);
+   }
+});
+router.post('/update-junior-info',authToken, async (req, res)  => {
     try{
     //    var id = db.escape(req.body.id);
     //    console.log(id);
