@@ -9,10 +9,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import Explore from "./pages/Explore";
 import Job from "./pages/Job";
 import User from "./pages/User";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
+
+  const queryClient = new QueryClient();
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <NavBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -24,7 +30,7 @@ function App() {
         <Route path="/user/:id" element={<User />} />
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} rtl={true} />
-    </>
+    </QueryClientProvider>
   );
 }
 

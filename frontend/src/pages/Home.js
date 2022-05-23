@@ -45,11 +45,26 @@ const Home = () => {
                     <img src={logo4} alt="" />
                     <img src={logo1} alt="" />
                 </div>
+
                 <div className="grid grid-cols-2 gap-y-16 place-items-center mt-24 pb-16 lg:hidden">
                     <Link to="/" className=''>דף הבית</Link>
                     <Link to="/explore" className=''>משרות</Link>
                     <Link to="/" className=''>שאלות ותשובות</Link>
                     <Link to="/" className=''>צור קשר</Link>
+                </div>
+            </div>
+            <div className="flex justify-evenly py-24 bg-slate-700 text-white">
+                <div className="text-center">
+                    <h2 className="text-3xl"><b>1500</b></h2>
+                    <h3 className="text-2xl">מתמחים</h3>
+                </div>
+                <div className="text-center">
+                    <h2 className="text-3xl"><b>800</b></h2>
+                    <h3 className="text-2xl">ארגונים חונכים</h3>
+                </div>
+                <div className="text-center">
+                    <h2 className="text-3xl"><b>4358</b></h2>
+                    <h3 className="text-2xl">בוגרים</h3>
                 </div>
             </div>
         </>
