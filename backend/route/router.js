@@ -3,14 +3,13 @@ const router = express.Router();
 const db = require('../DAL/index');
 const db2 = require('../DAL/db');
 const authToken = require('../Middlewares/authentication');
-// const { signupValidation, loginValidation } = require('./validator');
-// const { validationResult } = require('express-validator');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 db2.connect();
 router.post('/register',  (req, res) => {  
     db.query(
-        `SELECT * FROM juniors WHERE LOWER(mail) = LOWER(${db.escape(
+        `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(
             req.body.email
             )})`,
         (err, result) => {
@@ -32,7 +31,7 @@ router.post('/register',  (req, res) => {
                     } else {
                         // has hashed pw => add to database
                         db.query(
-                            `INSERT INTO juniors (name, mail, password) VALUES ('${req.body.name}', ${db.escape(req.body.email)},${db.escape(hash)});`,
+                            `INSERT INTO users (firstName,lastName, mail, password,isJunior) VALUES ('${req.body.first_name}','${req.body.last_name}', ${db.escape(req.body.email)},${db.escape(hash)},'${req.body.isJunior}');`,
                             (err, result) => {
                                 if (err) {
                                     //throw err;
@@ -54,24 +53,9 @@ router.post('/register',  (req, res) => {
     );
     //res.send("hello world");
 });
- router.get('/check-users',authToken, async (req, res)  => {
-
-         //res.send("hello world");
-          try{
-            let result = await db2.runQuery('SELECT * FROM juniors');
-            console.log(result);
-            let juniorsInfo = db2.extractDbResult(result);
-            res.send(juniorsInfo);
-         }
-        catch(e){
-             res.send(e);
-         }
-
-});
 router.post('/login', (req, res, next) => {
-
     db.query(
-        `SELECT * FROM juniors WHERE LOWER(mail) = LOWER(${db.escape(
+        `SELECT * FROM users WHERE LOWER(mail) = LOWER(${db.escape(
             req.body.email
             )})`,
         (err, result) => {
@@ -117,21 +101,69 @@ router.post('/login', (req, res, next) => {
     );
     //res.send("hello");
 });
-// router.post('/get-user', (req, res, next) => {
-//     if (
-//         !req.headers.authorization ||
-//         !req.headers.authorization.startsWith('Bearer') ||
-//         !req.headers.authorization.split(' ')[1]
-//     ) {
-//         return res.status(422).json({
-//             message: "Please provide the token",
-//         });
-//     }
-//     const theToken = req.headers.authorization.split(' ')[1];
-//     const decoded = jwt.verify(theToken, 'the-super-strong-secrect');
-//     db.query('SELECT * FROM juniors where id=?', decoded.id, function (error, results, fields) {
-//         if (error) throw error;
-//         return res.send({ error: false, data: results[0], message: 'Fetch Successfully.' });
-//     });
-// });
+router.get('/get-juniors',authToken, async (req, res)  => {
+
+         //res.send("hello world");
+          try{
+            let result = await db2.runQuery(
+                'SELECT * FROM `juniors` INNER JOIN (SELECT `firstName`,`lastName`,`mail`,`id` FROM users) as users ON users.id = juniors.user_id;'
+                );
+            console.log(result);
+            let juniorsInfo = db2.extractDbResult(result);
+            res.send(juniorsInfo);
+         }
+        catch(e){
+             res.send(e);
+         }
+});
+router.post('/get-user',authToken, async (req, res)  => {
+     try{
+        // var id = db.escape(req.body.id);
+        // console.log(id);
+        let result = await db2.runQuery(
+            'SELECT * FROM juniors INNER JOIN (SELECT `firstName`,`lastName`,`mail`,`id` FROM users) as users ON users.id = juniors.user_id WHERE LOWER(user_id) = '+ db.escape(req.body.id));
+        console.log(result);
+        let juniorsInfo = db2.extractDbResult(result);
+        res.send(juniorsInfo);
+    }
+   catch(e){
+        res.send(e);
+    }
+});
+router.post('/delete-user',authToken, async (req, res)  => {
+    try{
+    //    var id = db.escape(req.body.id);
+    //    console.log(id);
+       let result = await db2.runQuery(
+        'DELETE FROM juniors WHERE user_id ='+db.escape(req.body.id));
+       console.log(result);
+        result = await db2.runQuery(
+        'DELETE FROM users WHERE id ='+db.escape(req.body.id));
+        console.log(result);
+        result = await db2.runQuery(
+            'DELETE FROM project WHERE publisher_id ='+db.escape(req.body.id));
+        console.log(result);
+            
+       //let juniorsInfo = db2.extractDbResult(result);
+       res.send("Deleted");
+   }
+  catch(e){
+       res.send(e);
+   }
+});
+router.get('/get-projects',authToken, async (req, res)  => {
+
+    //res.send("hello world");
+     try{
+       let result = await db2.runQuery('SELECT * FROM project');
+       console.log(result);
+       let projectsInfo = db2.extractDbResult(result);
+       res.send(projectsInfo);
+    }
+   catch(e){
+        res.send(e);
+    }
+});
+
+
 module.exports = router;
