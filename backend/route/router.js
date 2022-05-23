@@ -141,7 +141,7 @@ router.post('/login', (req, res, next) => {
             }
             if (!result.length) {
                 return res.status(401).send({
-                    msg: 'Email or password is incorrect!'
+                    msg: 'מייל או סיסמה שגויים'
                 });
             }
 

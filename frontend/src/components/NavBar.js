@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoBlack from "../assets/logoBlack.png"
 import logoWhite from "../assets/logoWhite.png"
+import UseVerify from "../hooks/UseVerify";
 
 const NavBar = () => {
 
     const [isScrolled, setIsScrolled] = useState(false);
 
-    // const user = useVerify();
+    const isVerified = UseVerify();
+
+    useEffect(() => {
+        console.log(isVerified);
+    }, [isVerified])
 
     useEffect(() => {
         const checkScrollPosition = () => {

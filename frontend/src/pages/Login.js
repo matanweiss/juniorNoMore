@@ -15,11 +15,23 @@ const Login = () => {
             headers: { 'Content-Type': 'application/json' }
         })
     }, {
-        onSuccess: user => user.json().then(user => {
-            console.log(user);
-            toast.success('נכנסת למערכת בהצלחה');
-            return navigate("/explore");
-        })
+        onSuccess: res => {
+            if (res.ok) {
+                res.json().then(data => {
+                    console.log(data);
+                    toast.success('נכנסת למערכת בהצלחה');
+                    localStorage.setItem('jwt', data.token);
+                    localStorage.setItem('id', data.user.id);
+                    return navigate("/explore");
+                })
+
+            }
+            else {
+                res.json().then(msg => {
+                    toast.warning(msg.msg);
+                })
+            }
+        }
     });
 
     const navigate = useNavigate();
