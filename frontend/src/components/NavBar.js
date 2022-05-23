@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import logoBlack from "../assets/logoBlack.png"
 import logoWhite from "../assets/logoWhite.png"
-import UseVerify from "../hooks/UseVerify";
 
-const NavBar = () => {
+const NavBar = (props) => {
 
+    const navigate = useNavigate();
     const [isScrolled, setIsScrolled] = useState(false);
 
-    const isVerified = UseVerify();
-
-    useEffect(() => {
-        console.log(isVerified);
-    }, [isVerified])
+    const handleLogout = () => {
+        localStorage.setItem('jwt', '');
+        localStorage.setItem('id', '');
+        localStorage.setItem('isJunior', '');
+        props.setIsLoggedIn(false);
+        toast.success('התנתקת בהצלחה');
+        return navigate("/login");
+    }
 
     useEffect(() => {
         const checkScrollPosition = () => {
@@ -40,14 +45,19 @@ const NavBar = () => {
                 </div>
             </Link>
             <Link to="/" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline mr-16 ml-8`}>דף הבית</Link>
-            <Link to="/explore" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>משרות</Link>
+            <Link to="/explore" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>פרוייקטים</Link>
             <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline ml-8`}>שאלות ותשובות</Link>
             <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline`}>צור קשר</Link>
 
             <div className="mr-auto flex gap-6">
+                {props.isLoggedIn
+                    ? <button onClick={handleLogout} className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התנתק</button>
+                    : <>
+                        <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התחברות</Link>
+                        <Link to="/register" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>הרשמה</Link>
+                    </>
+                }
 
-                <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>התחברות</Link>
-                <Link to="/register" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'}`}>הרשמה</Link>
             </div>
         </nav>
     );

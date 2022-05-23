@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import InputMail from "../components/InputMail";
 import InputPassword from "../components/InputPassword";
 
-const Login = () => {
+const Login = (props) => {
 
     const mutation = useMutation(() => {
         return fetch(process.env.REACT_APP_SERVER_BASE_URL + '/login', {
@@ -22,6 +22,8 @@ const Login = () => {
                     toast.success('נכנסת למערכת בהצלחה');
                     localStorage.setItem('jwt', data.token);
                     localStorage.setItem('id', data.user.id);
+                    localStorage.setItem('isJunior', data.user.isJunior);
+                    props.setIsLoggedIn(true);
                     return navigate("/explore");
                 })
 

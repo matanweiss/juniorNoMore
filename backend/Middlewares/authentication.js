@@ -9,7 +9,7 @@ function authenticateToken(req, res, next) {
 
   if (token == null) return res.sendStatus(401)
 
-  jwt.verify(token, 'the-super-strong-secrect' , (err) => {
+  jwt.verify(token, 'the-super-strong-secrect', (err) => {
     //console.log(err)
 
     if (err) return res.sendStatus(403)

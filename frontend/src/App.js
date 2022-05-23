@@ -10,19 +10,21 @@ import Explore from "./pages/Explore";
 import Job from "./pages/Job";
 import User from "./pages/User";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { useState } from "react";
 
 const queryClient = new QueryClient();
 
 function App() {
 
   const queryClient = new QueryClient();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <NavBar />
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/first-login" element={<FirstLogin />} />
         <Route path="/explore" element={<Explore />} />

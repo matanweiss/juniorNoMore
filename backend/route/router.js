@@ -40,6 +40,15 @@ router.post('/register-junior', async (req, res) => {
     }
 });
 
+router.post('/verify', authToken, async (req, res) => {
+    try {
+        res.send(JSON.stringify("ok"));
+    }
+    catch (e) {
+        res.send(e);
+    }
+});
+
 router.post('/register-business', async (req, res) => {
     try {
         console.log(req.body);
@@ -166,7 +175,7 @@ router.post('/login', (req, res, next) => {
                         });
                     }
                     return res.status(401).send({
-                        msg: 'Username or password is incorrect!'
+                        msg: 'שם משתמש או סיסמה שגויים'
                     });
                 }
             );
