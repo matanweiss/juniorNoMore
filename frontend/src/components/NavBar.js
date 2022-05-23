@@ -7,6 +7,8 @@ const NavBar = () => {
 
     const [isScrolled, setIsScrolled] = useState(false);
 
+    // const user = useVerify();
+
     useEffect(() => {
         const checkScrollPosition = () => {
             if (window.scrollY > 10) {

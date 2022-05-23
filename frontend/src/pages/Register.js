@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../components/Button";
 import InputMail from "../components/InputMail";
 import InputPassword from "../components/InputPassword";
@@ -59,7 +59,7 @@ const Register = () => {
     }
 
     const renderFirstPage = () =>
-        <div className="space-y-12">
+        <div className="space-y-10 pt-4">
             <InputText name="name" text="שם מלא" value={name} setValue={setName} />
             <InputMail email={email} setEmail={setEmail} />
             <InputPassword password={password} setPassword={setPassword} />
@@ -67,18 +67,16 @@ const Register = () => {
                 <InputRadio handleChange={handleRadioChange} type={userType} text="ג'וניור" name="junior" />
                 <InputRadio handleChange={handleRadioChange} type={userType} text="עסק" name="business" />
             </div>
-            <Button text="הבא" />
+            <Button text="הבא" additionalClasses=" w-full" />
         </div>
 
     const renderSecondPage = () => {
         if (userType === 'junior') return (
-            <div className="flex gap-16">
-                <div className="space-y-8">
-                    <div className="flex flex-col">
-                        <label htmlFor="location">איזור בארץ:</label>
-                        <select onChange={e => setArea(e.target.value)} className="p-2 rounded-lg" name="location" id="location">
-                            {areas.map(area => <option key={area} value={area}>{area}</option>)}
-                        </select>
+            <>
+                <div className="flex gap-16">
+                    <div className="space-y-12">
+                        <InputTextarea text="ספר לנו על עצמך" name="personalNote" value={personalNote} setValue={setPersonalNote} />
+                        <InputText name="linkedin" text="קישור ל- LinkedIn" value={linkedin} setValue={setLinkedin} />
                     </div>
                     <div className="space-y-4">
                         <InputCheckbox text="יש לך תואר / בלימודים" name="isDegree" isChecked={isDegree} onCheck={setIsDegree} />
@@ -88,23 +86,18 @@ const Register = () => {
                                 <InputSearch description="מוסד לימודים" data={universities} setValue={setAcademy} />
                             </div>
                         }
-
-
                     </div>
+                </div>
+                <div className="mt-8 text-center">
                     <Button text="הרשמה" />
                 </div>
-                <div className="space-y-12">
-                    <InputTextarea text="ספר לנו על עצמך" name="personalNote" value={personalNote} setValue={setPersonalNote} />
-                    <InputText name="linkedin" text="קישור ל- LinkedIn" value={linkedin} setValue={setLinkedin} />
-                </div>
-            </div>
+            </>
         )
         else return (
             <div className="space-y-8">
                 <InputText name="city" text="עיר" value={city} setValue={setCity} />
                 <InputText name="field" text="תחום העסק" value={field} setValue={setField} />
                 <InputText name="website" text="אתר העסק" value={website} setValue={setWebsite} />
-                <InputTextarea name="service" text="שירות נדרש" value={service} setValue={setService} />
                 <Button text="הרשמה" />
             </div>)
     }

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../components/Button";
@@ -6,11 +8,28 @@ import InputPassword from "../components/InputPassword";
 
 const Login = () => {
 
+    const mutation = useMutation(() => {
+        return fetch(process.env.REACT_APP_SERVER_BASE_URL + '/login', {
+            method: 'post',
+            body: JSON.stringify({ email, password }),
+            headers: { 'Content-Type': 'application/json' }
+        })
+    }, {
+        onSuccess: user => user.json().then(user => {
+            console.log(user);
+            toast.success('נכנסת למערכת בהצלחה');
+            return navigate("/explore");
+        })
+    });
+
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
-        toast.success('נכנסת למערכת בהצלחה');
-        return navigate("/explore");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        mutation.mutate();
     }
 
     return (
@@ -21,8 +40,8 @@ const Login = () => {
                     <div className="text-xl text-center">
                         התחבר/י לחשבון שלך
                     </div>
-                    <InputMail />
-                    <InputPassword />
+                    <InputMail email={email} setEmail={setEmail} />
+                    <InputPassword password={password} setPassword={setPassword} />
                     <Button text="כניסה" />
                 </div>
             </form>

@@ -13,7 +13,7 @@ const InputText = (props) => {
                 onInput={e => e.target.setCustomValidity('')}
             />
             <label
-                className="pointer-events-none absolute text-gray-500 -top-5 right-0 origin-right scale-[0.9] peer-placeholder-shown:top-0 peer-placeholder-shown:right-1 peer-placeholder-shown:scale-100 transition-all"
+                className="pointer-events-none absolute text-gray-500 -top-4 right-0 origin-right scale-[0.9] peer-placeholder-shown:top-0 peer-placeholder-shown:right-1 peer-placeholder-shown:scale-100 transition-all"
                 htmlFor={props.name}
             >
                 {props.text}

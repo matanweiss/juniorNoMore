@@ -55,16 +55,16 @@ const Home = () => {
             </div>
             <div className="flex justify-evenly py-24 bg-slate-700 text-white">
                 <div className="text-center">
-                    <h2 className="text-3xl"><b>1500</b></h2>
-                    <h3 className="text-2xl">מתמחים</h3>
+                    <h2 className="lg:text-3xl text-xl"><b>1500</b></h2>
+                    <h3 className="lg:text-2xl text-lg">מתמחים</h3>
                 </div>
                 <div className="text-center">
-                    <h2 className="text-3xl"><b>800</b></h2>
-                    <h3 className="text-2xl">ארגונים חונכים</h3>
+                    <h2 className="lg:text-3xl text-xl"><b>800</b></h2>
+                    <h3 className="lg:text-2xl text-lg">ארגונים חונכים</h3>
                 </div>
                 <div className="text-center">
-                    <h2 className="text-3xl"><b>4358</b></h2>
-                    <h3 className="text-2xl">בוגרים</h3>
+                    <h2 className="lg:text-3xl text-xl"><b>4358</b></h2>
+                    <h3 className="lg:text-2xl text-lg">בוגרים</h3>
                 </div>
             </div>
         </>
