@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "../components/Button";
 import InputMail from "../components/InputMail";
 import InputPassword from "../components/InputPassword";
@@ -6,7 +6,7 @@ import InputRadio from "../components/InputRadio";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import InputCheckbox from "../components/InputCheckbox";
-import { areas, degrees, universities } from "../variables/variables";
+import { degrees, universities } from "../variables/variables";
 import InputSearch from "../components/InputSearch";
 import InputText from "../components/InputText";
 import InputTextarea from "../components/InputTextarea";
@@ -14,15 +14,24 @@ import { useMutation } from "react-query";
 
 const Register = () => {
 
+    const navigate = useNavigate();
     const [userType, setUserType] = useState('junior');
-
+    const [isSecondPage, setIsSecondPage] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [personalNote, setPersonalNote] = useState('');
+    const [linkedin, setLinkedin] = useState('');
+    const [isDegree, setIsDegree] = useState(true);
+    const [degree, setDegree] = useState('');
+    const [academy, setAcademy] = useState('');
 
     const mutation = useMutation(() => {
         return fetch(`http://localhost:4500/api/register-${userType}`, {
             method: 'post',
             body: userType === 'junior'
-                ? JSON.stringify({ skill1: null, skill2: null, skill3: null, phone: "054", isJunior: true, firstName: name, lastName: name, mail: email, password, personalNote, degree, academy, linkedin })
-                : JSON.stringify({ isJunior: false, firstName: name, lastName: name, mail: email, password }),
+                ? JSON.stringify({ skill1: null, skill2: null, skill3: null, phone: "054", isJunior: true, firstName: name.split(' ').slice(0, -1).join(' '), lastName: name.split(' ').slice(-1).join(' '), mail: email, password, personalNote, degree, academy, linkedin })
+                : JSON.stringify({ isJunior: false, firstName: name.split(' ').slice(0, -1).join(' '), lastName: name.split(' ').slice(-1).join(' '), mail: email, password }),
             headers: { 'Content-Type': 'application/json' }
         })
     }, {
@@ -42,17 +51,6 @@ const Register = () => {
     });
 
     const handleRadioChange = e => setUserType(e.target.id);
-
-    const navigate = useNavigate();
-    const [isSecondPage, setIsSecondPage] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [personalNote, setPersonalNote] = useState('');
-    const [linkedin, setLinkedin] = useState('');
-    const [isDegree, setIsDegree] = useState(true);
-    const [degree, setDegree] = useState('');
-    const [academy, setAcademy] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -96,9 +94,6 @@ const Register = () => {
                 <Button text="הרשמה" />
             </div>
         </>
-
-
-
 
     return (
         <div className="flex fixed inset-0 lg:bg-[#f5f5f7] justify-center items-center">
