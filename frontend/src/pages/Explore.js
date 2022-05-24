@@ -1,30 +1,19 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import ExploreItem from "../components/ExploreItem";
+import LinkAsButton from "../components/LinkAsButton";
+import { jobs } from "../variables/variables";
 
 const Explore = () => {
 
     const [isJunior, setIsJunior] = useState(false);
-    const [jobs, setJobs] = useState([]);
-
-    const { isLoading, data } = useQuery('jobs', () =>
-        fetch(process.env.REACT_APP_SERVER_BASE_URL + '/get-projects')
-            .then(res => res.json())
-    );
-
-    useEffect(() => {
-        if (data) {
-            setJobs(data);
-        }
-    }, [data]);
 
     const renderJobs = () => jobs.map(job =>
-        <ExploreItem applicable={isJunior} data={job} />
+        <ExploreItem key={job.id} applicable={isJunior} data={job} />
     )
 
 
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         if (localStorage.getItem('isJunior')) setIsJunior(true);
     }, []);
 
@@ -37,7 +26,7 @@ const Explore = () => {
                     {localStorage.getItem('isJunior') === "0" && <LinkAsButton to="/add-project" text="הוסף פרוייקט" ></LinkAsButton>}
                 </div>
             </div>
-            <div className="space-y-16 ">
+            <div className="space-y-16 mb-16">
                 {renderJobs()}
             </div>
         </div>

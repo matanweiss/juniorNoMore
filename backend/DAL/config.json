@@ -1,5 +1,5 @@
 {
-    "host": "192.168.64.2",
+    "host": "localhost",
     "user": "admin",
     "password": "Aa102030",
     "database": "hackathon2022"

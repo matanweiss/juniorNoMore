@@ -48,10 +48,10 @@ const NavBar = (props) => {
             <Link to="/login" className={`${isScrolled ? 'hover:text-slate-300' : 'hover:text-slate-600'} hidden lg:inline`}>צור קשר</Link>
 
             <div className="mr-auto flex gap-6">
-                {props.isLoggedIn
+                {localStorage.getItem('name')
                     ? <>
                         <Link to={`/user/${localStorage.getItem('id')}`} className="flex items-center lg:ml-4 gap-4 ">
-                            <div className="hidden rounded-full border-2 border-black w-12 h-12 lg:grid place-items-center">
+                            <div className={`hidden rounded-full border-2 ${isScrolled ? 'border-white' : 'border-black'} w-12 h-12 lg:grid place-items-center`}>
                                 <UserIcon className="w-8 h-8" />
                             </div>
                             <span>{localStorage.getItem('name')}</span>

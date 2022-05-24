@@ -58,7 +58,10 @@ const Register = () => {
             setIsSecondPage(true);
             return;
         }
-        mutation.mutate();
+        // mutation.mutate();
+        toast.success('נרשמת למערכת בהצלחה');
+        localStorage.setItem('name', name);
+        return navigate("/explore");
     }
 
     const renderFirstPage = () =>

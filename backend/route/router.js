@@ -76,7 +76,7 @@ router.post('/add-post', authToken, async (req, res) => {
         );
         console.log(result);
         let info = db2.extractDbResult(result);
-        res.send(info);
+        res.status(200).send(info);
     }
     catch (e) {
         res.send(e);
