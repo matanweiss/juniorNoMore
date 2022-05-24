@@ -39,7 +39,7 @@ const Register = () => {
             if (res.ok) {
                 console.log(res);
                 toast.success('נרשמת למערכת בהצלחה');
-                return navigate("/login");
+                return navigate("/first-login");
             }
             else {
                 res.json().then(msg => {
