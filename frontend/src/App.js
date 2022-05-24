@@ -11,6 +11,7 @@ import Job from "./pages/Job";
 import User from "./pages/User";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { useState } from "react";
+import AddProject from "./pages/AddProject";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/job/:id" element={<Job />} />
         <Route path="/user/:id" element={<User />} />
+        <Route path="/add-project" element={<AddProject />} />
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} rtl={true} />
     </QueryClientProvider>
