@@ -14,7 +14,6 @@ const NavBar = (props) => {
         localStorage.clear();
         props.setIsLoggedIn(false);
         toast.success('התנתקת בהצלחה');
-        return navigate("/login");
     }
 
     useEffect(() => {

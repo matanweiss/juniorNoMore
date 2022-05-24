@@ -12,12 +12,12 @@ const Home = () => {
                 <div className="lg:w-[50%] bg-slate-700 text-white text-center p-12 space-y-4">
                     <h1 className="lg:text-4xl text-2xl">ג'וניורים</h1>
                     <p>בואו להיות <b>מתמחים</b> ותתחילו את הקריירה עכשיו</p>
-                    <LinkAsButton to="/login" text="התחילו כאן" color="light" />
+                    <LinkAsButton to="/explore" text="צפה בפרוייקטים" color="light" />
                 </div>
                 <div className="lg:w-[50%] bg-slate-300 text-center p-12 space-y-4">
                     <h1 className="lg:text-4xl text-2xl">מעסיקים</h1>
                     <p>הצטרפו למאגר <b>הארגונים החונכים</b> ותנו הזדמנות לדור העתיד</p>
-                    <LinkAsButton to="/login" text="התחילו כאן" additional="px-8" />
+                    <LinkAsButton to="/register" text="הרשמה" additional="px-8" />
                 </div>
             </div>
             <div className="text-center space-y-8 p-12 max-w-4xl mx-auto">

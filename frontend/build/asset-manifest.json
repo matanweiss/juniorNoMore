@@ -1,19 +1,20 @@
 {
   "files": {
-    "main.css": "/juniorNoMore/static/css/main.a18d0d91.css",
-    "main.js": "/juniorNoMore/static/js/main.b04fff6e.js",
+    "main.css": "/juniorNoMore/static/css/main.8b10d963.css",
+    "main.js": "/juniorNoMore/static/js/main.c1d40a62.js",
     "static/media/logo3.svg": "/juniorNoMore/static/media/logo3.c11d6d7914d9234d8c1eab28bc602c73.svg",
     "static/media/logo2.svg": "/juniorNoMore/static/media/logo2.f1740e95dada461c43cd2405671f2c52.svg",
+    "static/media/Matan Weiss.jpg": "/juniorNoMore/static/media/Matan Weiss.4a3cf4aa69ef3d909092.jpg",
     "static/media/logoWhite.png": "/juniorNoMore/static/media/logoWhite.8b5351bce8f20570a845.png",
     "static/media/logoBlack.png": "/juniorNoMore/static/media/logoBlack.76f98bad81a05f294b96.png",
     "static/media/logo4.svg": "/juniorNoMore/static/media/logo4.63174ecd1402e158017f50898f0ff902.svg",
     "static/media/logo1.svg": "/juniorNoMore/static/media/logo1.89cf3ce57d294bc18398a4a2dea8d95a.svg",
     "index.html": "/juniorNoMore/index.html",
-    "main.a18d0d91.css.map": "/juniorNoMore/static/css/main.a18d0d91.css.map",
-    "main.b04fff6e.js.map": "/juniorNoMore/static/js/main.b04fff6e.js.map"
+    "main.8b10d963.css.map": "/juniorNoMore/static/css/main.8b10d963.css.map",
+    "main.c1d40a62.js.map": "/juniorNoMore/static/js/main.c1d40a62.js.map"
   },
   "entrypoints": [
-    "static/css/main.a18d0d91.css",
-    "static/js/main.b04fff6e.js"
+    "static/css/main.8b10d963.css",
+    "static/js/main.c1d40a62.js"
   ]
 }

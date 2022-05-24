@@ -21,7 +21,10 @@ const Explore = () => {
     return (
         <div className="px-4">
             <div className="text-center">
-                <h1 className="lg:text-4xl text-2xl my-8">פה ניתן לראות את הפרוייקטים שמתאימים לך</h1>
+                {isJunior
+                    ? <h1 className="lg:text-4xl text-2xl my-8">פה ניתן לראות את הפרוייקטים שמתאימים לך</h1>
+                    : <h1 className="lg:text-4xl text-2xl my-8">כל הפרוייקטים</h1>
+                }
                 <div className="mb-12">
                     {localStorage.getItem('name') && <LinkAsButton to="/add-project" text="הוסף פרוייקט" ></LinkAsButton>}
                 </div>
