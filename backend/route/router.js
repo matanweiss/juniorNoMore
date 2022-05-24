@@ -55,14 +55,28 @@ router.post('/update-user', authToken, async (req, res) => {
         );
         console.log(result);
         result = await db2.runQuery(
-<<<<<<< HEAD
-            "UPDATE juniors SET `personalNote` = " + db2.escape(req.body.personalNote) + ",`linkedin` = " + db2.escape(req.body.linkedin) + ",`academy` = " + db2.escape(req.body.academy) + ", `degree` = " + db2.escape(req.body.degree) + ",`phone` = " + db2.escape(req.body.phone) + ",`skill1`=" + db2.escape(req.body.skill1) + ",`skill2`=" + db2.escape(req.body.skill2) + ",`skill3`=" + db2.escape(req.body.skill3) + " WHERE id = " + db2.escape(req.body.id) + '"'
-=======
-            "UPDATE juniors SET `personalNote` = " + db2.escape(req.body.personalNote)+",`linkedin` = " +db2.escape(req.body.linkedin)+",`academy` = "+db2.escape(req.body.academy) +", `degree` = "+ db2.escape(req.body.degree)+",`phone` = " + db2.escape(req.body.phone)+",`skill1`="+ db2.escape(req.body.skill1)+",`skill2`="+db2.escape(req.body.skill2)+",`skill3`="+db2.escape(req.body.skill3)+" WHERE user_id = "+ db2.escape(req.body.id)+'"' 
->>>>>>> bc28c1b80549dbae4299078d264fc02848ef6be6
+            "UPDATE juniors SET `personalNote` = " + db2.escape(req.body.personalNote) + ",`linkedin` = " + db2.escape(req.body.linkedin) + ",`academy` = " + db2.escape(req.body.academy) + ", `degree` = " + db2.escape(req.body.degree) + ",`phone` = " + db2.escape(req.body.phone) + ",`skill1`=" + db2.escape(req.body.skill1) + ",`skill2`=" + db2.escape(req.body.skill2) + ",`skill3`=" + db2.escape(req.body.skill3) + " WHERE user_id = " + db2.escape(req.body.id) + '"'
         );
         console.log(result);
         res.status(200).send("updated");
+    }
+    catch (e) {
+        res.send(e);
+    }
+});
+router.post('/add-post', authToken, async (req, res) => {
+    try {
+        console.log(req.body);
+        let result = await db2.runQuery(
+            'INSERT INTO business (`name`, `business_area`, `user_id`, `website`, `social_media`) VALUES (' + db.escape(req.body.business_name) +','+ db.escape(req.body.business_area) +','+ db.escape(req.body.user_id) +','+ db.escape(req.body.website) +','+ db.escape(req.body.social_media) + ');'
+        );
+        console.log(result);
+        result = await db2.runQuery(
+            'INSERT INTO project (`name`, `skills`, `experation_date`, `remote`, `description`, `publisher_id`) VALUES (' + db.escape(req.body.name)+','+db.escape(req.body.skills) +','+db.escape(req.body.experation_date)+','+db.escape(req.body.remote)+','+db.escape(req.body.description)+','+db.escape(req.body.publisher_id)+');'
+        );
+        console.log(result);
+        let info = db2.extractDbResult(result);
+        res.send(info);
     }
     catch (e) {
         res.send(e);
