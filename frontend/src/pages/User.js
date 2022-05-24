@@ -67,7 +67,7 @@ const User = () => {
                 </div>
                 <EditableText element={about} isEditing={isEditing} />
                 <div>
-                    <a href="linkedin.com/in/matanweiss" target="_blank">קישור ללינקדאין</a>
+                    <a href="https://linkedin.com/in/matan-weiss" target="_blank">קישור ללינקדאין</a>
                 </div>
                 <div className="space-x-2">
                     {renderSubGenres()}

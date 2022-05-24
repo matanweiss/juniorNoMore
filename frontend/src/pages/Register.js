@@ -78,8 +78,8 @@ const Register = () => {
 
     const renderSecondPage = () =>
         <>
-            <div className="flex gap-16">
-                <div className="space-y-12">
+            <div className="lg:flex gap-16">
+                <div className="space-y-12 mb-12 lg:mb-0">
                     <InputTextarea text="ספר לנו על עצמך" name="personalNote" value={personalNote} setValue={setPersonalNote} />
                     <InputText name="linkedin" text="קישור ל- LinkedIn" value={linkedin} setValue={setLinkedin} />
                 </div>
