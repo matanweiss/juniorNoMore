@@ -1,9 +1,27 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import ExploreItem from "../components/ExploreItem";
 
 const Explore = () => {
 
     const [isJunior, setIsJunior] = useState(false);
+    const [jobs, setJobs] = useState([]);
+
+    const { isLoading, data } = useQuery('jobs', () =>
+        fetch(process.env.REACT_APP_SERVER_BASE_URL + '/get-projects')
+            .then(res => res.json())
+    );
+
+    useEffect(() => {
+        if (data) {
+            setJobs(data);
+        }
+    }, [data]);
+
+    const renderJobs = () => jobs.map(job =>
+        <ExploreItem applicable={isJunior} data={job} />
+    )
+
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -20,11 +38,7 @@ const Explore = () => {
                 </div>
             </div>
             <div className="space-y-16 ">
-                <ExploreItem applicable={isJunior} />
-                <ExploreItem applicable={isJunior} />
-                <ExploreItem applicable={isJunior} />
-                <ExploreItem applicable={isJunior} />
-                <ExploreItem applicable={isJunior} />
+                {renderJobs()}
             </div>
         </div>
     );

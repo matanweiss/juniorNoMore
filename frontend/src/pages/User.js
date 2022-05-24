@@ -23,27 +23,6 @@ const User = () => {
         ).then(res => res.json())
     );
 
-    const mutation = useMutation(() => {
-        return fetch(process.env.REACT_APP_SERVER_BASE_URL + '/update-user', {
-            method: 'post',
-            body: JSON.stringify({ ...data[0], firstName: title.current.split(' ').slice(0, -1).join(' '), lastName: title.current.split(' ').slice(-1).join(' ') }),
-            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
-        })
-    }, {
-        onSuccess: res => {
-            if (res.ok) {
-                console.log(data);
-                toast.success('המשתמש עודכן בהצלחה');
-                setIsEditing(false);
-            }
-            else {
-                res.json().then(msg => {
-                    toast.warning(msg.msg);
-                })
-            }
-        }
-    });
-
     useEffect(() => {
         if (data) {
             const realData = data[0];
@@ -66,45 +45,36 @@ const User = () => {
         <SubGenreLink key={subGenre} to={`/sub-genre/${subGenre}`} text={subGenre} />
     )
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        mutation.mutate();
-    }
-
-    if (isLoading) return <h1>spin</h1>
-
     return (
         <div className="px-4">
-            <form onSubmit={handleSubmit}>
-                <div className="text-right space-y-8 max-w-3xl mx-auto mt-8">
-                    <div className="flex items-center gap-8">
-                        <div className="rounded-full border-2 border-black w-24 h-24 grid place-items-center">
-                            <UserIcon className="w-16 h-16 stroke-1" />
-                        </div>
-                        <EditableText element={title} isEditing={isEditing} additional="lg:text-4xl text-2xl" />
-                        <span className="hidden lg:flex mr-auto gap-4">
-                            {isEditing && <Button text={<div className="flex">שמירה<CheckIcon className="w-6 h-6" /></div>} />}
-                            <Button action={() => { setIsEditing(!isEditing) }}
-                                text={isEditing
-                                    ? <div className="flex">ביטול<XIcon className="w-6 h-6" /></div>
-                                    : <div className="flex">עריכה<PencilIcon className="w-6 h-6" /></div>}
-                            />
-                        </span>
+            <div className="text-right space-y-8 max-w-3xl mx-auto mt-8">
+                <div className="flex items-center gap-8">
+                    <div className="rounded-full border-2 border-black w-24 h-24 grid place-items-center">
+                        <UserIcon className="w-16 h-16 stroke-1" />
                     </div>
-                    <EditableText element={about} isEditing={isEditing} />
-                    <div className="space-x-2">
-                        {renderSubGenres()}
-                    </div>
-                    <div className="lg:hidden flex justify-between">
-                        <Button type="button" action={() => { setIsEditing(!isEditing) }}
+                    <EditableText element={title} isEditing={isEditing} additional="lg:text-4xl text-2xl" />
+                    <span className="hidden lg:flex mr-auto gap-4">
+                        {isEditing && <Button text={<div className="flex">שמירה<CheckIcon className="w-6 h-6" /></div>} />}
+                        <Button action={() => { setIsEditing(!isEditing) }}
                             text={isEditing
                                 ? <div className="flex">ביטול<XIcon className="w-6 h-6" /></div>
                                 : <div className="flex">עריכה<PencilIcon className="w-6 h-6" /></div>}
                         />
-                        {isEditing && <Button text={<div className="flex">שמירה<CheckIcon className="w-6 h-6" /></div>} />}
-                    </div>
+                    </span>
                 </div>
-            </form>
+                <EditableText element={about} isEditing={isEditing} />
+                <div className="space-x-2">
+                    {renderSubGenres()}
+                </div>
+                <div className="lg:hidden flex justify-between">
+                    <Button type="button" action={() => { setIsEditing(!isEditing) }}
+                        text={isEditing
+                            ? <div className="flex">ביטול<XIcon className="w-6 h-6" /></div>
+                            : <div className="flex">עריכה<PencilIcon className="w-6 h-6" /></div>}
+                    />
+                    {isEditing && <Button text={<div className="flex">שמירה<CheckIcon className="w-6 h-6" /></div>} />}
+                </div>
+            </div>
         </div>
     );
 }

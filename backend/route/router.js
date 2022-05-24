@@ -68,11 +68,11 @@ router.post('/add-post', authToken, async (req, res) => {
     try {
         console.log(req.body);
         let result = await db2.runQuery(
-            'INSERT INTO business (`name`, `business_area`, `user_id`, `website`, `social_media`) VALUES (' + db.escape(req.body.business_name) +','+ db.escape(req.body.business_area) +','+ db.escape(req.body.user_id) +','+ db.escape(req.body.website) +','+ db.escape(req.body.social_media) + ');'
+            'INSERT INTO business (`name`, `business_area`, `user_id`, `website`, `social_media`) VALUES (' + db.escape(req.body.business_name) + ',' + db.escape(req.body.business_area) + ',' + db.escape(req.body.user_id) + ',' + db.escape(req.body.website) + ',' + db.escape(req.body.social_media) + ');'
         );
         console.log(result);
         result = await db2.runQuery(
-            'INSERT INTO project (`name`, `skills`, `experation_date`, `remote`, `description`, `publisher_id`) VALUES (' + db.escape(req.body.name)+','+db.escape(req.body.skills) +','+db.escape(req.body.experation_date)+','+db.escape(req.body.remote)+','+db.escape(req.body.description)+','+db.escape(req.body.publisher_id)+');'
+            'INSERT INTO project (`name`, `skills`, `experation_date`, `remote`, `description`, `publisher_id`) VALUES (' + db.escape(req.body.name) + ',' + db.escape(req.body.skills) + ',' + db.escape(req.body.experation_date) + ',' + db.escape(req.body.remote) + ',' + db.escape(req.body.description) + ',' + db.escape(req.body.publisher_id) + ');'
         );
         console.log(result);
         let info = db2.extractDbResult(result);
@@ -288,7 +288,7 @@ router.post('/delete-junior-info', authToken, async (req, res) => {
         res.send(e);
     }
 });
-router.get('/get-projects', authToken, async (req, res) => {
+router.get('/get-projects', async (req, res) => {
 
     //res.send("hello world");
     try {
